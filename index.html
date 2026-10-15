@@ -34,9 +34,16 @@
   --wine:#E6A3C0; --wine-soft:#44232F; --leaf:#8CCB98; --leaf-soft:#213B27; --gold:#E8BE6A; --warn:#F2A394; --warn-soft:#45231E;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:120px}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:0 16px 80px}
-.wrap{max-width:1080px;margin:0 auto}
+html{scroll-behavior:smooth;scroll-padding-top:120px;overflow-x:hidden;max-width:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:0 16px 80px;overflow-x:hidden;max-width:100%;position:relative}
+.wrap{max-width:1080px;margin:0 auto;width:100%;min-width:0}
+img,svg,video,canvas,iframe{max-width:100%}
+main,#main,.view,.grid,.card,.controls,.row,.days,.day,.meta,.acts{min-width:0;max-width:100%}
+table{max-width:100%}
+.tbl-scroll,section.card:has(table){overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;overscroll-behavior-x:contain}
+td,th{overflow-wrap:anywhere}
+.controls{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.controls::-webkit-scrollbar{display:none}
 h1,h2,h3,p{margin:0}
 h2{font-family:var(--display);font-style:italic;font-size:1.8rem;line-height:1.15}
 h3{font-family:var(--display);font-style:italic;font-size:1.2rem;line-height:1.2}
@@ -148,18 +155,22 @@ footer{margin-top:28px;font-size:.8rem;color:var(--muted);display:grid;gap:6px}
 .tab{display:flex;align-items:center;gap:6px;position:relative}
 .tab svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .tab .n{background:var(--coral);color:#fff;border-radius:999px;padding:0 6px;opacity:1}
-@media (max-width:899px){
+@media (max-width:1024px){
  body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
- .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;margin:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);justify-content:space-around;gap:2px;overflow:visible;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
- .tab{flex:1 1 0;flex-direction:column;justify-content:center;gap:2px;min-height:56px;padding:4px 0;border:0;border-radius:12px;background:transparent;font-size:.68rem;color:var(--muted)}
+ .tabs{position:fixed;left:0;right:0;bottom:0;z-index:8000;margin:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);justify-content:space-around;gap:2px;overflow:visible;box-shadow:0 -4px 16px rgba(0,0,0,.08);max-width:100%;box-sizing:border-box}
+ .tab{flex:1 1 0;flex-direction:column;justify-content:center;gap:2px;min-height:56px;padding:4px 0;border:0;border-radius:12px;background:transparent;font-size:.68rem;color:var(--muted);min-width:0}
  .tab svg{width:22px;height:22px}
  .tab[aria-selected="true"]{background:var(--teal-soft)!important;color:var(--teal-d)!important;border:0}
  :root[data-theme="dark"] .tab[aria-selected="true"]{color:var(--teal)!important}
+ @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:var(--teal)!important}}
  .tab .n{position:absolute;top:2px;left:calc(50% + 6px);margin:0;font-size:.62rem;line-height:1.5}
  .ta-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
  .top-row{padding-bottom:8px}
+ /* Map + content sit above the fixed bottom nav */
+ .leafmap{height:calc(100dvh - 280px)!important;min-height:220px;max-height:560px;width:100%;max-width:100%}
+ .mapwrap,.mapslot,.leafmap,.leaflet-container{max-width:100%}
 }
-@media (min-width:900px){.tab svg{display:none}}
+@media (min-width:1025px){.tab svg{display:none}}
 @media (max-width:360px){.tab span:not(.n){font-size:.6rem}}
 .card{content-visibility:auto;contain-intrinsic-size:auto 420px}
 .badge{display:inline-block;font:800 .68rem var(--body);padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:middle;background:var(--leaf-soft);color:var(--leaf)}
@@ -180,7 +191,7 @@ footer{margin-top:28px;font-size:.8rem;color:var(--muted);display:grid;gap:6px}
   <div class="wrap">
     <div class="top-row">
       <div><div class="logo">Tampa <span>Trip</span></div></div>
-      <div class="tools"><button class="pill" id="theme" aria-label="Toggle dark mode">◐ Theme</button></div>
+      <div class="tools"></div>
     </div>
     <nav class="tabs" role="tablist" id="tabs"></nav>
   </div>
@@ -488,8 +499,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("input",e=>{if(e.target.id==="q"){S.q=e.target.value;clearTimeout(window._qt);window._qt=setTimeout(renderGrid,120)}});
 document.addEventListener("change",e=>{if(e.target.id==="hood"){S.hood=e.target.value;renderGrid()}if(e.target.id==="day"){S.day=e.target.value;renderGrid()}});
-$("#theme").addEventListener("click",()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark";localStorage.setItem("tampa-theme",r.dataset.theme)});
-const th=localStorage.getItem("tampa-theme");if(th)document.documentElement.dataset.theme=th;
+try{localStorage.removeItem("tampa-theme");document.documentElement.removeAttribute("data-theme")}catch(e){}
 window.TRIP_VENUES=V.map(v=>({name:v.n.replace(/&amp;/g,"&"),area:v.hood,type:CATN[v.c]||"",address:v.a})).concat(P.filter(p=>!p.v&&p.id!=="p-armature").map(p=>({name:p.n.replace(/&amp;/g,"&"),area:p.hood,type:"Photo spot",address:p.a})));
 updSaved();
 const h=location.hash.slice(1);show(VIEWS[h]?h:"home",{keep:true,noscroll:true});

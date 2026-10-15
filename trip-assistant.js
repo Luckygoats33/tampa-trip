@@ -118,7 +118,8 @@
     return 2;
   }
   function openPlace(id) {
-    var sheet = host("openSheet");
+    if (open) hide();
+    var sheet = (window.TAMPA && window.TAMPA.openSheet) || host("openSheet") || window.openSheet;
     if (typeof sheet === "function") { sheet(id); return; }
     var go = host("goVenue");
     if (typeof go === "function") { go(id); return; }
@@ -332,12 +333,21 @@
     sugg.appendChild(b);
   });
 
-  function addMsg(who, html) {
+  function scrollToMsgStart(d) {
+    if (!d || !log) return;
+    requestAnimationFrame(function () {
+      var top = d.offsetTop - 6;
+      log.scrollTop = Math.max(0, top);
+    });
+  }
+  function addMsg(who, html, opts) {
     var d = document.createElement("div");
     d.className = "ta-msg " + who;
     d.innerHTML = html;
     log.appendChild(d);
-    log.scrollTop = log.scrollHeight;
+    if (opts && opts.pinStart) scrollToMsgStart(d);
+    else if (who === "me") scrollToMsgStart(d);
+    else log.scrollTop = log.scrollHeight;
     return d;
   }
 
@@ -349,7 +359,9 @@
       '<div class="ta-cat">' + esc(cat) + (v.hood ? " · " + esc(v.hood) : "") + (v.t ? " · " + esc(v.t) : "") + "</div>" +
       "<strong>" + esc(name) + "</strong>" +
       '<p class="ta-why"><b>Why it fits:</b> ' + esc(whyLine(r, f)) + "</p>" +
-      (v.why ? '<p class="ta-blurb">' + esc(plain(v.why).slice(0, 140)) + (plain(v.why).length > 140 ? "…" : "") + "</p>" : "") +
+      (v.why ? (plain(v.why).length > 90
+        ? '<details class="ta-more"><summary>More about this place</summary><p class="ta-blurb">' + esc(plain(v.why).slice(0, 160)) + (plain(v.why).length > 160 ? "…" : "") + "</p></details>"
+        : '<p class="ta-blurb">' + esc(plain(v.why)) + "</p>") : "") +
       '<p class="ta-hours">' + esc(hoursLine(v, f)) + (r.dist != null ? " · " + fmtDist(r.dist) : "") + "</p>" +
       '<div class="ta-acts">' +
       '<a class="ta-act map" href="' + esc(mapsUrl(v)) + '" target="_blank" rel="noopener">Map</a>' +
@@ -367,13 +379,14 @@
       html += '<div class="ta-cards">' + pack.results.map(function (r) { return cardHtml(r, pack.filter); }).join("") + "</div>";
       html += '<p class="ta-hint">Follow up with “closer”, “cheaper”, or “tomorrow”.</p>';
     }
-    addMsg("bot", html);
+    addMsg("bot", html, { pinStart: true });
   }
 
   function ask(q) {
     q = (q || input.value || "").trim();
     if (!q) return;
     input.value = "";
+    if (sugg) sugg.hidden = true;
     addMsg("me", esc(q));
     var needsNear = /\b(near\s*me|nearby|closest|closer|around\s*here)\b/i.test(q) || /^\s*closer\b/i.test(q);
     function run() {
@@ -410,6 +423,28 @@
   });
 
   var open = false;
+  function fitPanel() {
+    if (!open || !panel || panel.hidden) return;
+    if (window.innerWidth >= 1025 || !window.visualViewport) {
+      panel.style.top = "";
+      panel.style.height = "";
+      panel.style.bottom = "";
+      return;
+    }
+    var vv = window.visualViewport;
+    var layoutH = window.innerHeight;
+    var keyboardOpen = vv.height < layoutH - 80;
+    if (keyboardOpen) {
+      /* Fill the visual viewport so the input stays above the keyboard */
+      panel.style.top = vv.offsetTop + "px";
+      panel.style.height = Math.max(200, vv.height) + "px";
+      panel.style.bottom = "auto";
+    } else {
+      panel.style.top = "";
+      panel.style.height = "";
+      panel.style.bottom = "";
+    }
+  }
   function show() {
     open = true;
     panel.hidden = false;
@@ -418,19 +453,39 @@
     if (!log.childNodes.length) {
       addMsg("bot", "Hi — I know the places on this " + esc(cfg.city || "trip") + " guide. Ask about dinner, wine, recovery, outdoors, photos, or what’s open. Tap a suggestion or type your own.");
     }
-    setTimeout(function () { input.focus(); }, 0);
+    if (window.visualViewport) {
+      visualViewport.addEventListener("resize", fitPanel);
+      visualViewport.addEventListener("scroll", fitPanel);
+    }
+    fitPanel();
+    setTimeout(function () { input.focus(); fitPanel(); }, 0);
   }
   function hide() {
     open = false;
     panel.hidden = true;
     document.documentElement.classList.remove("ta-open");
     fab.classList.remove("ta-fab-open");
+    panel.style.top = "";
+    panel.style.height = "";
+    panel.style.bottom = "";
+    if (window.visualViewport) {
+      visualViewport.removeEventListener("resize", fitPanel);
+      visualViewport.removeEventListener("scroll", fitPanel);
+    }
     fab.focus();
   }
   function toggle() { if (open) hide(); else show(); }
   fab.onclick = toggle;
   panel.querySelector(".ta-x").onclick = hide;
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) hide(); });
+  /* Close assistant when tapping a bottom-nav tab so the tab works */
+  document.addEventListener("click", function (e) {
+    if (!open) return;
+    var tab = e.target.closest(".tab[data-tab], #tabs [data-tab]");
+    if (tab) hide();
+  }, true);
+  input.addEventListener("focus", function () { setTimeout(fitPanel, 300); });
+  input.addEventListener("blur", function () { setTimeout(fitPanel, 200); });
 
   // Hide FAB while scrolling down (NOLA behavior)
   var lastY = window.scrollY, idle = null;

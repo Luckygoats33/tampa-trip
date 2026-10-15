@@ -122,6 +122,7 @@ var sheetRoot=document.createElement("div");sheetRoot.id="sheet-root";document.b
 var lastFocus=null;
 function openSheet(id){
   var it=item(id);if(!it)return;
+  try{if(window.TripAssistant&&typeof window.TripAssistant.close==="function")window.TripAssistant.close()}catch(e){}
   lastFocus=document.activeElement;
   var isV=!!it.h&&!!it.why&&!!it.hs, isH=it.c==="help", sv=saved.has(it.id), vis=!!J.visits[it.id], c=coordOf(it);
   var r=it.res==="must"?["Reserve ahead","res"]:it.res==="yes"?["Reservations recommended","res"]:it.res==="appt"?["Book / call ahead","appt"]:it.res==="maybe"?["Reservations available","opt"]:null;
@@ -189,7 +190,7 @@ function ensureMap(slot){
   applyDark();applyLock(slot);
   setTimeout(function(){LMAP.invalidateSize();if(!LMAP._fitted){fitAll();LMAP._fitted=true}else if(window._mapGo){var g=window._mapGo;window._mapGo=null;LMAP.setView(g[0],g[1])}updateMarkers();updateMapList()},40);
 }
-function isDarkNow(){var r=document.documentElement;return r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches}
+function isDarkNow(){return matchMedia("(prefers-color-scheme:dark)").matches}
 function applyDark(){if(mapEl)mapEl.classList.toggle("dark",isDarkNow())}
 new MutationObserver(applyDark).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 try{matchMedia("(prefers-color-scheme:dark)").addEventListener("change",applyDark)}catch(e){}
@@ -395,7 +396,7 @@ var HELPS=[
 ];
 var GUIDE=[
  ["Start here",[["What this is","Your Tampa trip in one place: places, a real map, the day-by-day plan, saved spots, a journal, and practical help. Dates (Thu Oct 29 to Sun Nov 1, 2026) are built in."],["The 3-second version","Use the bar at the bottom to move around. Tap any place for its card: open or closed, hours, why it's worth it, and how to get there. Tap ♡ Save to keep it."],["Take the tour","Tap <b>Take the tour</b> at the top of this page or on Home. It walks through each tab; tap Next or × to stop."]]],
- ["The top of the screen",[["Open now","The pill at the top shows only what's open at the time you pick. On trip days it uses real Tampa time; before the trip it previews a Friday evening, and you can change the day and time."],["Theme","◐ Theme switches light and dark. By default it follows your phone."],["Install app","If your browser offers it, <b>Install app</b> appears at the top and puts the trip on your home screen. On iPhone: Safari → Share → Add to Home Screen."],["Ask the trip assistant","The round Ask button at the bottom right opens an in-page chat that matches your question to places in this guide (same format as the NOLA app — no external chat apps)."]]],
+ ["The top of the screen",[["Open now","The pill at the top shows only what's open at the time you pick. On trip days it uses real Tampa time; before the trip it previews a Friday evening, and you can change the day and time."],["Light and dark","The app follows your phone's light/dark setting."],["Install app","If your browser offers it, <b>Install app</b> appears at the top and puts the trip on your home screen. On iPhone: Safari → Share → Add to Home Screen."],["Ask the trip assistant","The round Ask button at the bottom right opens an in-page chat that matches your question to places in this guide (same format as the NOLA app — no external chat apps)."]]],
  ["The bottom bar",[["Home","Greeting, countdown, Tampa weather, Surprise me, Near me and quick tiles."],["Plan","The four days with times, reservation flags and a <b>Route this day</b> link."],["Places","Search and filter every place; <b>Photo spots</b> is the toggle at the top."],["Map","Every place as a pin by type, plus ER, urgent care and a 24-hour pharmacy."],["Saved","Everything you hearted. The badge counts them."],["Journal","Mark places visited, rate them, keep notes, share a recap."],["Help","This page."]]],
  ["Places and details",[["Filters","Type chips, ★ Local favorites, Photo-worthy, neighborhood, and the day you want to go. <b>Open now</b> and <b>Near me</b> sit next to the search box."],["Details card","Tap <b>Details</b> on a card or a pin on the map. You get hours, Directions, Call, the official page, Save, Mark visited, Copy link and Copy address."],["Copy link","Copies a link that opens straight to that place."]]],
  ["Map",[["Moving the map","On phones the map is locked so the page scrolls. Tap <b>Tap here to move the map</b> to pan and zoom, then <b>Done moving the map</b>."],["Pins and filters","Pins are colored by type and group when zoomed out; tap a group to zoom in. Filter by type, Open now, or Saved only. Quick buttons jump to an area."],["Locate me","Allow location to see yourself on the map and sort the list by distance. Your location never leaves this device."]]],
@@ -483,13 +484,14 @@ function afterSavedChange(){if(cur==="map"&&LMAP)updateMarkers()}
 
 /* ---------- events ---------- */
 document.addEventListener("click",function(e){
-  var t=e.target.closest("[data-sheet],[data-closesheet],[data-visit],[data-copylink],[data-copyaddr],[data-onmap],[data-locate],[data-lview],[data-mapcat],[data-mapsaved],[data-opennow],[data-whenreset],[data-near],[data-maplock],[data-daymap],[data-surprise],[data-svibe],[data-sgo],[data-rate],[data-addnote],[data-delnote],[data-share],[data-sendloc],[data-copynotes],[data-tour],[data-tournav],[data-tourend],[data-helpjump],[data-nearest],[data-mapcat-go],[data-save],#openpill,#installbtn");
+  var t=e.target.closest("[data-sheet],[data-taopen],[data-closesheet],[data-visit],[data-copylink],[data-copyaddr],[data-onmap],[data-locate],[data-lview],[data-mapcat],[data-mapsaved],[data-opennow],[data-whenreset],[data-near],[data-maplock],[data-daymap],[data-surprise],[data-svibe],[data-sgo],[data-rate],[data-addnote],[data-delnote],[data-share],[data-sendloc],[data-copynotes],[data-tour],[data-tournav],[data-tourend],[data-helpjump],[data-nearest],[data-mapcat-go],[data-save],#openpill,#installbtn");
   if(!t)return;
   var d=t.dataset;
   if(t.id==="openpill")return setOpen();
   if(t.id==="installbtn"){if(window._ip){window._ip.prompt();window._ip=null;t.hidden=true}return}
   if(d.closesheet){if(d.closesheet==="back"&&e.target!==t)return;return closeSheet()}
   if(d.sheet){e.preventDefault();return openSheet(d.sheet)}
+  if(d.taopen){e.preventDefault();return openSheet(d.taopen)}
   if(d.save){setTimeout(afterSavedChange,0);return}
   if(d.visit){toggleVisit(d.visit);var on=!!J.visits[d.visit];
     if(cur==="journal")return show("journal",{keep:true,noscroll:true});
@@ -547,5 +549,6 @@ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();win
   if(p&&item(p))openSheet(p);
   try{if(!localStorage.getItem("tampa-toured")&&!p&&!h){localStorage.setItem("tampa-toured","1");setTimeout(function(){toast("New here? Tap Help → Take the tour")},800)}}catch(e){}
 })();
-window.TAMPA={openSheet:openSheet,stateAt:stateAt,ranges:ranges,coordOf:coordOf};
+window.openSheet=openSheet;
+window.TAMPA={openSheet:openSheet,closeSheet:closeSheet,stateAt:stateAt,ranges:ranges,coordOf:coordOf,locate:locate,LOC:function(){return LOC},distOf:distOf,nowInfo:nowInfo,whenLabel:whenLabel};
 })();
