@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tampa Trip · Oct 29 – Nov 1, 2026</title>
+<meta name="description" content="Healthy restaurants, biohacking and longevity spots, and natural wine: a 4-day Tampa guide, Oct 29 – Nov 1, 2026.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#12413F">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Pacifico&family=Nunito+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FFF8EE; --surface:#FFFFFF; --sunk:#F7EBD8; --ink:#25303A; --muted:#5F6B73; --line:#E8D9BF;
+  --teal:#1F6F6B; --teal-d:#12413F; --teal-soft:#D7EEEA;
+  --sun:#E58A3A; --sun-soft:#FCE6CF; --coral:#C9503F; --coral-soft:#FBE0DA;
+  --wine:#7B2D4F; --wine-soft:#F1DCE5; --leaf:#4C8C5B; --leaf-soft:#DDEFE0; --gold:#8E6512;
+  --warn:#8F2D1F; --warn-soft:#FBE3DE;
+  --script:"Pacifico","Brush Script MT",cursive; --display:"Playfair Display",Georgia,serif;
+  --body:"Nunito Sans","Segoe UI",system-ui,sans-serif; --mono:"DM Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121C1D; --surface:#1B2829; --sunk:#243536; --ink:#F2EBDD; --muted:#B4BFBD; --line:#33484A;
+  --teal:#7FD3C7; --teal-d:#0B1F20; --teal-soft:#1D3F3D; --sun:#F2A65E; --sun-soft:#43301C; --coral:#F29A8B; --coral-soft:#472622;
+  --wine:#E6A3C0; --wine-soft:#44232F; --leaf:#8CCB98; --leaf-soft:#213B27; --gold:#E8BE6A; --warn:#F2A394; --warn-soft:#45231E;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121C1D; --surface:#1B2829; --sunk:#243536; --ink:#F2EBDD; --muted:#B4BFBD; --line:#33484A;
+  --teal:#7FD3C7; --teal-d:#0B1F20; --teal-soft:#1D3F3D; --sun:#F2A65E; --sun-soft:#43301C; --coral:#F29A8B; --coral-soft:#472622;
+  --wine:#E6A3C0; --wine-soft:#44232F; --leaf:#8CCB98; --leaf-soft:#213B27; --gold:#E8BE6A; --warn:#F2A394; --warn-soft:#45231E;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:0 16px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3,p{margin:0}
+h2{font-family:var(--display);font-style:italic;font-size:1.8rem;line-height:1.15}
+h3{font-family:var(--display);font-style:italic;font-size:1.2rem;line-height:1.2}
+a{color:var(--teal);text-underline-offset:2px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:.85rem}
+.eyebrow{font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);margin:0 -16px;padding:0 16px;border-bottom:1px solid var(--line)}
+.wave{height:8px;margin:0 -16px;background:repeating-linear-gradient(90deg,var(--teal) 0 24px,var(--sun) 24px 36px,var(--wine) 36px 48px)}
+.top-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding-top:10px}
+.logo{font:400 1.8rem/1.2 var(--script);color:var(--coral)} .logo span{color:var(--teal)}
+.sub{font:.75rem var(--mono);color:var(--muted)}
+.tools{display:flex;gap:8px;align-items:center}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:700}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--teal-d);border-color:var(--teal-d);color:#FFF8EE}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{background:var(--teal);color:#0B1F20}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{background:var(--teal);color:#0B1F20}
+.tab .n{font:.7rem var(--mono);margin-left:5px;opacity:.8}
+
+main{padding-top:20px;display:grid;gap:20px}
+.view{display:grid;gap:18px}
+
+/* hero */
+.hero{border-radius:18px;padding:26px 22px;color:#FFF8EE;background:
+  radial-gradient(circle at 85% 20%,rgba(244,184,96,.9) 0 70px,transparent 71px),
+  linear-gradient(135deg,#12413F,#1F6F6B 60%,#2C8A82);display:grid;gap:10px;overflow:hidden}
+.hero h1{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--script);margin:0}
+.hero p{max-width:56ch;font-size:1.02rem}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.fact{border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:700;background:rgba(255,248,238,.16);border:1px solid rgba(255,248,238,.3)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.tile b{font-family:var(--display);font-style:italic;font-size:1.05rem}
+.tile button.go{justify-self:start;border:0;background:none;color:var(--teal);font-weight:800;padding:0;text-decoration:underline}
+
+/* days */
+.day{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.day-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;padding:14px 18px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.day-h .d{font:500 .8rem var(--mono);color:var(--coral);letter-spacing:.08em;text-transform:uppercase}
+.steps{list-style:none;margin:0;padding:6px 18px 14px}
+.step{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border:0}
+.time{font:500 .8rem var(--mono);color:var(--muted);padding-top:2px}
+.step .t{font-weight:800}
+.step .w{color:var(--muted);font-size:.9rem}
+.lnk{border:0;background:none;padding:0;color:var(--teal);font-weight:800;text-decoration:underline;text-underline-offset:2px;text-align:left}
+.flag{display:inline-block;font:500 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:middle}
+.flag.res{background:var(--coral-soft);color:var(--warn)}
+.flag.appt{background:var(--sun-soft);color:var(--gold)}
+.flag.opt{background:var(--teal-soft);color:var(--teal)}
+
+/* controls */
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.85rem;font-weight:700;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--teal-d);border-color:var(--teal-d);color:#FFF8EE}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{background:var(--teal);color:#0B1F20}}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{background:var(--teal);color:#0B1F20}
+.field{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;font:inherit;color:var(--ink);min-width:0}
+input.search{flex:1 1 220px}
+.count{font:.8rem var(--mono);color:var(--muted)}
+
+/* venues */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--teal)}
+.card[data-c="eat"]{border-top-color:var(--sun)}
+.card[data-c="well"]{border-top-color:var(--teal)}
+.card[data-c="wine"]{border-top-color:var(--wine)}
+.card[data-c="juice"]{border-top-color:var(--leaf)}
+.card.hl{box-shadow:0 0 0 3px var(--coral)}
+.card-h{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.cat{font:500 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tier{font:500 .85rem var(--mono);color:var(--gold);white-space:nowrap}
+.why{font-size:.95rem}
+.meta{display:grid;gap:3px;font-size:.86rem;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:700}
+.hours{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:.74rem;font-family:var(--mono)}
+.hours div{background:var(--sunk);border-radius:6px;padding:4px 6px;min-width:0}
+.hours div.closed{opacity:.6}
+.hours i{font-style:normal;display:block;color:var(--coral);font-weight:500}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.btn{border:1px solid var(--teal);color:var(--teal);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.85rem;font-weight:800;text-decoration:none;display:inline-block}
+.btn.solid{background:var(--teal-d);color:#FFF8EE;border-color:var(--teal-d)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.solid{background:var(--teal);color:#0B1F20;border-color:var(--teal)}}
+:root[data-theme="dark"] .btn.solid{background:var(--teal);color:#0B1F20;border-color:var(--teal)}
+.save{margin-left:auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:800}
+.save[aria-pressed="true"]{background:var(--coral-soft);border-color:var(--coral);color:var(--warn)}
+.ver{font:.7rem var(--mono);color:var(--muted)}
+
+/* notes */
+.note{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:8px}
+.note ul{margin:0;padding-left:1.1rem;display:grid;gap:6px}
+.alert{border-radius:12px;padding:12px 14px;background:var(--sun-soft);border:1px solid var(--line);font-size:.92rem}
+.alert.warn{background:var(--warn-soft)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+th{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+footer{margin-top:28px;font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+@media (min-width:760px){body{font-size:16px}.logo{font-size:2.1rem}.step{grid-template-columns:100px 1fr}.days{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}}
+@media (max-width:420px){.hours{grid-template-columns:repeat(2,1fr)}.step{grid-template-columns:64px 1fr}}
+@media print{.top,.acts,.save,.controls{display:none!important}.view{display:grid!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wave"></div>
+  <div class="wrap">
+    <div class="top-row">
+      <div><div class="logo">Tampa <span>Trip</span></div><div class="sub">Thu Oct 29 – Sun Nov 1, 2026 · Will, Sanni &amp; her sister</div></div>
+      <div class="tools"><span class="pill" id="savedPill">♥ 0 saved</span><button class="pill" id="theme" aria-label="Toggle dark mode">◐ Theme</button></div>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs"></nav>
+  </div>
+</header>
+<div class="wrap"><main id="main"></main>
+<footer>
+  <p>Every place below was checked against its own site (or a current listing) on Oct 14, 2026. Hours change, especially around holidays: tap through or call before you go. Price tiers ($–$$$$) are our estimate, not published prices, unless a dollar figure is shown.</p>
+  <p>Wellness services are not medical advice; ask a clinician about IVs, NAD+ or cold exposure if you have any health conditions.</p>
+</footer></div>
+
+<script>
+/* h = [Thu Oct 29, Fri Oct 30, Sat Oct 31, Sun Nov 1] */
+const V=[
+{id:"rooster",c:"eat",n:"Rooster & the Till",hood:"Seminole Heights",a:"6500 N Florida Ave, Tampa, FL 33604",t:"$$$",ph:"(813) 374-8940",
+ h:["5–9pm","5–10pm (bar to 12am)","5–10pm (bar to 12am)","Closed"],hs:"Wed–Thu 5–9pm · Fri–Sat 5–10pm, bar to midnight",
+ why:"Michelin Bib Gourmand kitchen turning out vegetable-forward, globally inspired small plates with an adventurous wine list.",
+ res:"must",site:"https://www.roosterandthetill.com/",src:"roosterandthetill.com",note:"Reserve via OpenTable or phone (they do not take reservations by email). Free lot at Diane St &amp; Florida Ave."},
+{id:"ulele",c:"eat",n:"Ulele",hood:"Tampa Heights · Riverwalk",a:"1810 N Highland Ave, Tampa, FL 33602",t:"$$$",ph:"(813) 999-4952",
+ h:["11am–10pm","11am–11pm","11am–11pm","11am–10pm"],hs:"Sun–Thu 11am–10pm · Fri–Sat 11am–11pm",
+ why:"Native-inspired Florida seafood and produce cooked over a huge barbacoa grill, right on the Hillsborough River; states its food is non-GMO with no added hormones or antibiotics.",
+ res:"yes",site:"https://ulele.com/",src:"ulele.com",note:"Casual-elegant; men need sleeves. Great for a riverside lunch."},
+{id:"elevage",c:"eat",n:"Élevage SoHo Kitchen & Bar",hood:"SoHo · Hyde Park",a:"1207 S Howard Ave, Tampa, FL 33606",t:"$$$",ph:"855-829-2536 (hotel)",
+ h:["Dinner 5–10pm","Dinner 5–10pm","Dinner 5–10pm","Dinner 5–10pm"],hs:"Daily · brunch from 7am · dinner 5–10pm",
+ why:"Polished hotel dining room on SoHo's main strip with fresh seafood and vegan options, listed in the Michelin Guide.",
+ res:"yes",site:"https://www.epicureanhotel.com/taste/elevage/",src:"epicureanhotel.com/hours-information",note:"Inside the Epicurean Hotel; complimentary valet before 7pm for restaurant guests."},
+{id:"lilac",c:"eat",n:"Lilac (The Tampa EDITION)",hood:"Water Street",a:"500 Channelside Dr, Tampa, FL 33602",t:"$$$$",ph:"813-771-8022",
+ h:["5–9pm","5–10pm","5–10pm","Closed"],hs:"Tue–Thu 5–9pm · Fri–Sat 5–10pm",
+ why:"Chef John Fraser's three-time Michelin-starred modern Mediterranean, built on seasonal, locally sourced ingredients. The one splurge on this list.",
+ res:"must",site:"https://www.lilacrestauranttampa.com/",src:"lilacrestauranttampa.com",note:"Eight-course tasting or à la carte; tell them dietary needs in advance. Smart attire."},
+{id:"oxford",c:"eat",n:"Oxford Exchange",hood:"Hyde Park",a:"420 W Kennedy Blvd, Tampa, FL 33606",t:"$$",ph:"813-253-0222",
+ h:["7:30am–5:30pm","7:30am–5:30pm","8am–5:30pm","8am–5:30pm"],hs:"Mon–Fri 7:30am–5:30pm · Sat–Sun 8am–5:30pm",
+ why:"Light-filled restaurant, coffee bar and bookstore in one landmark building: a calm, pretty brunch before Hyde Park wandering.",
+ res:"yes",site:"https://oxfordexchange.com/",src:"oxfordexchange.com/pages/visit-us",note:"Paid attendant lot nearby, plus metered street parking on W Grand Central Ave."},
+{id:"nakedfarmer",c:"eat",n:"Naked Farmer (Water Street)",hood:"Water Street",a:"1001 Water St, Tampa, FL 33602",t:"$$",ph:"(813) 608-0329",
+ h:["11am–9:30pm","11am–10:30pm","11am–10:30pm","11:30am–9pm"],hs:"Mon–Thu 11am–9:30pm · Fri–Sat 11am–10:30pm · Sun 11:30am–9pm",
+ why:"Scratch-made farm-to-table bowls and plates from regional farms, with vegan, gluten-free and high-protein options plus wine and beer.",
+ res:"",site:"https://www.eatnakedfarmer.com/tampa-water-street",src:"eatnakedfarmer.com",note:"Counter-style and fast. Steps from the Riverwalk and Sparkman Wharf."},
+{id:"parkshore",c:"eat",n:"Parkshore Grill",hood:"St. Petersburg (day trip)",a:"300 Beach Dr NE, St. Petersburg, FL 33701",t:"$$$",ph:"727-896-9463",
+ h:["11am–9:30pm","11am–10:30pm","11am–10:30pm","10:30am–9:30pm"],hs:"Mon–Thu 11am–9:30pm · Fri–Sat 11am–10:30pm · Sun 10:30am–9:30pm",
+ why:"Waterfront modern American on Beach Drive; VISIT FLORIDA notes sustainable seafood and local organic produce.",
+ res:"yes",site:"https://www.parkshoregrill.com/",src:"parkshoregrill.com/contact",note:"Book a table by phone for Sunday brunch or lunch."},
+
+{id:"pause",c:"well",n:"Pause Studio · Midtown",hood:"Midtown",a:"1113 Assembly Dr, Tampa, FL 33607",t:"$$",ph:"(813) 697-1683",
+ h:["8am–8pm*","8am–8pm*","8am–8pm*","8am–8pm*"],hs:"*Daily 8am–8pm per directory listings; confirm when you book",
+ why:"One stop for infrared sauna, cold plunge contrast, float pod, cryotherapy, LED light bed, compression and IV/NAD+ shots. Private rooms with showers.",
+ res:"appt",site:"https://pausestudio.com/locations/midtown-tampa",src:"pausestudio.com + fountain.clinic",note:"Listed sessions: sauna 30/60, contrast 30/60, float 60, cryo 10, LED 10 min. Book online as a visitor. Hours came from directory listings, not the studio site."},
+{id:"tbtw",c:"well",n:"Tampa Bay Total Wellness",hood:"Hyde Park · SoHo",a:"300 S Hyde Park Ave, Suite 210, Tampa, FL 33606",t:"$$$",ph:"(813) 609-4150",
+ h:["9am–7pm","9am–5pm","10am–4pm","Not listed"],hs:"Mon–Wed, Fri 9–5 · Thu 9–7 · Sat 10–4",
+ why:"Physician-led NAD+ IV menu with posted prices: 250 mg $250, 500 mg $375, 750 mg $500.",
+ res:"appt",site:"https://tampabaytotalwellness.com/nad-iv-therapy-tampa/",src:"tampabaytotalwellness.com",note:"Call to book; screening questions apply. Thursday is the late day."},
+{id:"agerej",c:"well",n:"AgeRejuvenation · South Tampa",hood:"Hyde Park",a:"220 N Howard Ave, Tampa, FL 33606",t:"$$$",ph:"813-254-6141",
+ h:["9am–5pm","9am–5pm","Closed","Closed"],hs:"Mon–Tue 9–5 · Wed 10–6 · Thu–Fri 9–5 · closed weekends",
+ why:"Independent longevity and functional-medicine clinic offering provider-supervised IV drips, NAD+ and red light therapy.",
+ res:"appt",site:"https://agerejuvenation.com/location-tampa/wellness-center/iv-therapy/",src:"agerejuvenation.com",note:"Weekday only, so Thursday or Friday. Pricing is not published; ask when you call."},
+
+{id:"cleanjuice",c:"juice",n:"Clean Juice · Hyde Park Village",hood:"Hyde Park",a:"1634 W Snow Ave, Tampa, FL 33606",t:"$",ph:"813-252-5535",
+ h:["8am–7pm","8am–7pm","8am–7pm","8am–7pm"],hs:"Daily 8am–7pm (Hyde Park Village listing)",
+ why:"USDA-certified organic cold-pressed juices, smoothies, açaí and grain bowls, made in front of you.",
+ res:"",site:"https://hydeparkvillage.com/tenants/clean-juice/",src:"hydeparkvillage.com + locations.cleanjuice.com",note:"Part of a national organic franchise, but the easiest organic juice in Hyde Park Village."},
+{id:"heightsmarket",c:"juice",n:"Armature Works · Heights Public Market",hood:"Heights · Armature Works",a:"1910 N Ola Ave, Tampa, FL 33602",t:"$$",ph:"info@armatureworks.com",
+ h:["7:30am–10pm","7:30am–12am","8am–12am","9am–9pm"],hs:"Mon–Thu 7:30am–10pm · Fri 7:30am–12am · Sat 8am–12am · Sun 9am–9pm",
+ why:"Restored riverfront warehouse and food hall on the Hillsborough River: grab coffee, a bowl or a snack, then walk the Riverwalk.",
+ res:"",site:"https://www.armatureworks.com/location/armature-works/",src:"armatureworks.com",note:"Individual vendors keep their own hours. Free lot parking Mon–Fri until 4pm (not the 220 lot). A 3% venue fee is added to checks."},
+
+{id:"setima",c:"wine",n:"La Sétima Club",hood:"Ybor City",a:"815 E 7th Ave, Tampa, FL 33602",t:"$$",ph:"(813) 400-1610",
+ h:["5–10pm","5pm–12am","5pm–12am","5–10pm"],hs:"Closed Mon · Tue–Thu 5–10pm · Fri–Sat 5pm–12am · Sun 5–10pm",
+ why:"Tampa's dedicated natural-wine bar: rotating list of minimalist, zero-zero bottles, with beer and NA options and Louisiana-inspired bar food.",
+ res:"",site:"https://www.lasetimaclub.com/",src:"lasetimaclub.com",note:"Small, cozy room on 7th Ave. Opened by the team behind Jug & Bottle Dept."},
+{id:"wineonwater",c:"wine",n:"Wine on Water",hood:"Water Street",a:"1057 Water St, Tampa, FL 33602",t:"$$",ph:"(813) 921-0570",
+ h:["12–11pm","12pm–12am","12pm–12am","12–9pm"],hs:"Mon–Thu 12–11pm · Fri–Sat 12pm–12am · Sun 12–9pm",
+ why:"Small wine shop (150+ selections) with a focus on small-production, sustainable and organic wineries; by-the-glass list on a patio.",
+ res:"",site:"https://www.wineonwatertpa.com/",src:"wineonwatertpa.com",note:"Retail bottles can be opened on-site for a $15 corkage fee (per Star Wine List). Wednesdays: ticketed “Layover In” tasting event."},
+{id:"jug",c:"wine",n:"Jug & Bottle Dept.",hood:"Seminole Heights",a:"6203 N Florida Ave, Tampa, FL 33604",t:"$$",ph:"813-231-4444",
+ h:["12–9pm","12–9pm","12–9pm","12–9pm"],hs:"Mon–Tue 2–9pm · Wed–Sun 12–9pm · kitchen 2–9pm",
+ why:"Curated bottle shop with a focus on natural, vegan and specialty wines (plus sake). Pick up bottles to take home.",
+ res:"",site:"https://www.jugandbottledept.com/",src:"jugandbottledept.com",note:"Pair with dinner at Rooster &amp; the Till, a few blocks up the same avenue (Rooster is at 6500 N Florida)."},
+{id:"cru",c:"wine",n:"Cru Cellars · Palma Ceia",hood:"Palma Ceia · South Tampa",a:"2506 S MacDill Ave, Tampa, FL 33629",t:"$$",ph:"(813) 831-1117",
+ h:["3–10pm","12–10pm","11am–10pm","11am–9pm"],hs:"Retail: Mon 3–9 · Tue–Thu 3–10 · Fri 12–10 · Sat 11–10 · Sun 11–9",
+ why:"Wine bar plus retail shop with small-production organic and natural bottles by the glass and to go; kitchen on site.",
+ res:"maybe",site:"https://www.crucellars.com/",src:"crucellars.com/contact-us",note:"Has a reservations page on its site. Same owners as Wine on Water."},
+{id:"hostess",c:"wine",n:"Hostess",hood:"St. Petersburg (day trip)",a:"2635 Central Ave, St. Petersburg, FL 33713",t:"$$",ph:"727-289-3082",
+ h:["3–9pm","3–9pm","12–9pm","12–6pm"],hs:"Closed Mon–Tue · Wed–Fri 3–9pm · Sat 12–9pm · Sun 12–6pm",
+ why:"Boutique and garden wine bar pouring small-batch, sustainable and natural vintners; an easy afternoon glass or pre-dinner toast.",
+ res:"",site:"https://www.toastthehostess.com/",src:"toastthehostess.com",note:"Sunday closes early, at 6pm."}
+];
+const CATS={all:"All",eat:"Eat",well:"Biohack",wine:"Natural wine",juice:"Juice & markets"};
+const CATN={eat:"Restaurant",well:"Wellness / longevity",wine:"Wine",juice:"Juice / market"};
+const DAYS=[["Thu","Oct 29"],["Fri","Oct 30"],["Sat","Oct 31"],["Sun","Nov 1"]];
+const $=s=>document.querySelector(s), byId=id=>V.find(v=>v.id===id);
+const maps=v=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(v.n.replace(/ \(.*\)/,"")+" "+v.a);
+const esc=s=>s;
+let saved=new Set(JSON.parse(localStorage.getItem("tampa-saved")||"[]"));
+
+/* itinerary: [time, html, venueId?, flag?] */
+const PLAN=[
+{d:0,title:"South Tampa soft landing",hood:"Hyde Park · SoHo · Palma Ceia",steps:[
+ ["Afternoon","Arrive and settle. Wander <b>Hyde Park Village</b> and grab an organic juice.","cleanjuice"],
+ ["2–5pm","Optional longevity stop: an NAD+ IV (Thursday is the late day, open to 7pm) or a clinic consult.","tbtw","appt"],
+ ["5:30pm","First glass of natural wine at a bar-and-bottle-shop in Palma Ceia.","cru"],
+ ["7:30pm","Dinner in SoHo: seafood and vegan options in a polished room.","elevage","res"]]},
+{d:1,title:"Recovery, Heights &amp; Seminole Heights",hood:"Midtown · Hyde Park · Heights",steps:[
+ ["9:00am","Recovery morning: infrared sauna, cold plunge, float or LED bed in private rooms.","pause","appt"],
+ ["12:00pm","Brunch or lunch plus the bookstore, back in Hyde Park.","oxford"],
+ ["3:00pm","Riverside stroll: coffee or a snack at the food hall, then walk the Riverwalk.","heightsmarket"],
+ ["6:30pm","Dinner in Seminole Heights, ranked No. 1 in the Tampa Bay Times Top 50 in 2018 (per its site). Book early.","rooster","res"],
+ ["9:30pm","Nightcap in Ybor (rideshare, open to midnight).","setima"]]},
+{d:2,title:"Water Street, Riverwalk &amp; a splurge dinner",hood:"Seminole Heights · Heights · Water Street",steps:[
+ ["12:00pm","Browse natural bottles to take home (opens at noon on Saturday).","jug"],
+ ["1:30pm","Riverside lunch on the Hillsborough, with the Riverwalk right outside.","ulele","res"],
+ ["4:30pm","Wine on the Water Street patio. Hop the free streetcar or walk the Riverwalk.","wineonwater"],
+ ["7:00pm","Big dinner: Michelin-starred Mediterranean. Prefer lighter? Do Naked Farmer instead.","lilac","res"],
+ ["Alt","Light, farm-driven dinner on Water Street.","nakedfarmer","opt"]]},
+{d:3,title:"St. Pete day trip (optional)",hood:"St. Petersburg",steps:[
+ ["10:30am","Waterfront brunch on Beach Drive. About a 30–45 minute drive from Tampa (check live traffic).","parkshore","res"],
+ ["2:00pm","Garden glass of natural wine on Central Ave. Closes at 6pm on Sunday.","hostess"],
+ ["Evening","Head back, or skip St. Pete: <b>Cru Cellars</b> (Sun 11am–9pm) and <b>Naked Farmer</b> (Sun 11:30am–9pm) keep Sunday easy in Tampa.","cru","opt"]]}
+];
+const FL={res:["Reserve ahead","res"],appt:["Book / call ahead","appt"],opt:["Optional","opt"]};
+
+function dayCard(p){
+  const dd=DAYS[p.d];
+  return `<section class="day"><div class="day-h"><div><div class="d">${dd[0]} · ${dd[1]}</div><h3>${p.title}</h3></div><span class="small muted">${p.hood}</span></div><ul class="steps">`+
+  p.steps.map(s=>{const v=s[2]&&byId(s[2]);const f=s[3]&&FL[s[3]];
+   return `<li class="step"><div class="time">${s[0]}</div><div><div class="t">${v?`<button class="lnk" data-go="${v.id}">${v.n}</button>`:""}${f?`<span class="flag ${f[1]}">${f[0]}</span>`:""}${v&&v.res==="must"&&!f?`<span class="flag res">Reserve ahead</span>`:""}</div><div class="w">${s[1]}</div></li>`}).join("")+`</ul></section>`;
+}
+function hoursGrid(v){return `<div class="hours">`+v.h.map((x,i)=>`<div class="${/^Closed|Not listed/.test(x)?"closed":""}"><i>${DAYS[i][0]} ${DAYS[i][1].split(" ")[1]}</i>${x}</div>`).join("")+`</div>`}
+function card(v){
+  const r=v.res==="must"?["Reserve ahead","res"]:v.res==="yes"?["Reservations recommended","res"]:v.res==="appt"?["Book / call ahead","appt"]:v.res==="maybe"?["Reservations available","opt"]:null;
+  return `<article class="card" data-c="${v.c}" id="v-${v.id}"><div class="card-h"><div><div class="cat">${CATN[v.c]} · ${v.hood}</div><h3>${v.n}</h3></div><div class="tier" title="Estimated price tier">${v.t}</div></div>
+  <p class="why">${v.why}${r?` <span class="flag ${r[1]}">${r[0]}</span>`:""}</p>
+  ${hoursGrid(v)}
+  <div class="meta"><div><b>Address</b> ${v.a}</div><div><b>${v.ph.includes("@")?"Email":"Phone"}</b> ${v.ph}</div><div><b>Full hours</b> ${v.hs}</div><div>${v.note}</div></div>
+  <div class="acts"><a class="btn solid" href="${maps(v)}" target="_blank" rel="noopener">Map</a><a class="btn" href="${v.site}" target="_blank" rel="noopener">Website</a><button class="save" data-save="${v.id}" aria-pressed="${saved.has(v.id)}">${saved.has(v.id)?"♥ Saved":"♡ Save"}</button></div>
+  <div class="ver">✓ Verified Oct 14, 2026 · ${v.src}</div></article>`;
+}
+
+const VIEWS={
+home(){return `<div class="view">
+ <section class="hero"><div class="eyebrow" style="color:#F4B860">Tampa, Florida · 4 days</div><h1>Eat clean, recover well, drink natural.</h1>
+ <p>A planned weekend for Will, Sanni and her sister: healthy restaurants, biohacking and longevity stops, and natural, organic wine, mostly $$ to $$$ with one optional splurge.</p>
+ <div class="facts"><span class="fact">Thu Oct 29 → Sun Nov 1</span><span class="fact">${V.length} verified places</span><span class="fact">Highs about 79–86°F</span><span class="fact">Clocks fall back Sun Nov 1</span></div></section>
+ <div class="alert warn"><b>Book first:</b> Rooster &amp; the Till and Lilac are both closed Sunday and fill up. Reserve Friday and Saturday dinners now. Saturday is Halloween, so expect busier nightlife areas.</div>
+ <div class="cards">
+  <div class="tile"><span class="eyebrow">Day by day</span><b>The plan</b><p class="small muted">Thu in Hyde Park/SoHo, Fri recovery + the Heights, Sat Water Street + a splurge dinner, Sun St. Pete.</p><button class="go" data-tab="plan">Open the plan →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="eat").length} places</span><b>Healthy &amp; upscale eats</b><p class="small muted">Farm-to-table, seafood and vegetable-forward kitchens.</p><button class="go" data-tab="places" data-cat="eat">See restaurants →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="well").length} places</span><b>Biohack &amp; longevity</b><p class="small muted">Sauna, cold plunge, float, cryo, red light, NAD+ IVs.</p><button class="go" data-tab="places" data-cat="well">See wellness →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="wine").length} places</span><b>Natural wine</b><p class="small muted">Wine bars and bottle shops focused on natural, organic, small-production.</p><button class="go" data-tab="places" data-cat="wine">See wine →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="juice").length} places</span><b>Juice &amp; markets</b><p class="small muted">Organic juice and the riverfront food hall.</p><button class="go" data-tab="places" data-cat="juice">See juice →</button></div>
+  <div class="tile"><span class="eyebrow">Know before you go</span><b>Weather, transport, tips</b><p class="small muted">What to pack, how to get around, and reservation flags.</p><button class="go" data-tab="notes">Practical notes →</button></div>
+ </div></div>`},
+plan(){return `<div class="view"><div class="head"><h2>Suggested itinerary</h2><p class="muted">Tap any place name to jump to its details. Tags show where to book ahead.</p></div><div class="days">${PLAN.map(dayCard).join("")}</div></div>`},
+places(){const hoods=[...new Set(V.map(v=>v.hood))].sort();
+ return `<div class="view"><div class="head"><h2>Every place</h2><p class="muted">Search, filter by type, neighborhood or the day you want to go.</p></div>
+ <div class="controls row" id="chips">${Object.entries(CATS).map(([k,l])=>`<button class="chip" data-chip="${k}" aria-pressed="${k===S.cat}">${l}</button>`).join("")}<button class="chip" data-chip="saved" aria-pressed="${S.cat==="saved"}">♥ Saved</button></div>
+ <div class="controls row"><input class="field search" id="q" type="search" placeholder="Search name, neighborhood, or “sauna”…" value="${S.q}" aria-label="Search places"><select class="field" id="hood" aria-label="Neighborhood"><option value="">All neighborhoods</option>${hoods.map(h=>`<option ${h===S.hood?"selected":""}>${h}</option>`).join("")}</select><select class="field" id="day" aria-label="Open on day"><option value="">Any day</option>${DAYS.map((d,i)=>`<option value="${i}" ${String(i)===S.day?"selected":""}>Open ${d[0]} ${d[1]}</option>`).join("")}</select><span class="count" id="count"></span></div>
+ <div class="grid" id="grid"></div></div>`},
+notes(){return `<div class="view"><div class="head"><h2>Practical notes</h2></div><div class="days">
+ <div class="note"><h3>Weather</h3><p class="small muted">1991–2020 normals for Tampa (FSU Florida Climate Center):</p>
+ <table><tr><th></th><th>Avg high</th><th>Avg low</th><th>Rain / month</th></tr><tr><td>October</td><td>85.6°F</td><td>69.2°F</td><td>2.34 in</td></tr><tr><td>November</td><td>78.9°F</td><td>60.7°F</td><td>1.40 in</td></tr></table>
+ <p>Expect warm days and cooler evenings across the trip. Pack light layers for patios and A/C, plus a light rain layer. Normals are averages, so check the forecast the week before.</p></div>
+ <div class="note"><h3>Getting around</h3><ul>
+ <li><b>Rideshare</b> (Uber/Lyft) is the easy way between neighborhoods: Hyde Park, Seminole Heights and Ybor are not walkable to each other.</li>
+ <li><b>TECO Line Streetcar</b> is free, 7 days a week, every 15 minutes, linking Downtown, the Channel District/Water Street and Ybor City.</li>
+ <li><b>Riverwalk:</b> walkable between Armature Works, Ulele and Downtown; Pirate Water Taxi runs hop-on/off stops along it.</li>
+ <li><b>DASH</b> shared rides run low-cost hub-to-hub trips downtown.</li>
+ <li><b>Parking:</b> downtown metered spaces are enforced 8am–12am daily. Armature Works lots are free Mon–Fri until 4pm.</li>
+ <li><b>St. Pete:</b> about 30–45 minutes by car depending on traffic.</li></ul></div>
+ <div class="note"><h3>Reserve ahead</h3><ul>
+ <li><span class="flag res">Must</span> Rooster &amp; the Till (OpenTable or phone). Lilac (strongly recommended). Both closed Sunday.</li>
+ <li><span class="flag res">Yes</span> Ulele, Élevage SoHo, Parkshore Grill, Oxford Exchange for a weekend table.</li>
+ <li><span class="flag appt">Book</span> Pause Studio (online), Tampa Bay Total Wellness and AgeRejuvenation (call). AgeRejuvenation is closed weekends.</li>
+ <li>Walk-in friendly: La Sétima, Wine on Water, Jug &amp; Bottle, Naked Farmer, Hostess, Clean Juice, Heights Public Market.</li></ul></div>
+ <div class="note"><h3>Good to know</h3><ul>
+ <li><b>Clocks fall back</b> at 2am Sunday Nov 1, so you gain an hour.</li>
+ <li><b>Halloween</b> is Saturday Oct 31: book dinner early and plan rides in advance.</li>
+ <li><b>Biohacking visitors:</b> private clubs aside, Pause Studio takes visitors online. Clinics ask for a health intake before IVs/NAD+.</li>
+ <li><b>Natural wine:</b> the best shopping is Jug &amp; Bottle (Seminole Heights), Wine on Water and Cru Cellars. Bottles at Wine on Water can be opened on-site for a corkage fee.</li>
+ <li><b>Prices:</b> $–$$$$ tiers are our estimates. Posted prices are noted where a place publishes them (e.g. NAD+ at Tampa Bay Total Wellness).</li></ul></div>
+ </div>
+ <div class="note"><h3>Neighborhood cheat sheet</h3><table>
+ <tr><th>Area</th><th>Why go</th><th>Picks</th></tr>
+ <tr><td>Hyde Park / SoHo</td><td>Boutiques, brunch, clinics, hotel dining</td><td>Oxford Exchange, Élevage, Clean Juice, Tampa Bay Total Wellness, AgeRejuvenation</td></tr>
+ <tr><td>Seminole Heights</td><td>Chef-driven dining and bottle shops</td><td>Rooster &amp; the Till, Jug &amp; Bottle</td></tr>
+ <tr><td>Heights / Armature Works</td><td>Riverfront, food hall</td><td>Heights Public Market, Ulele</td></tr>
+ <tr><td>Ybor City</td><td>Historic nightlife district</td><td>La Sétima Club</td></tr>
+ <tr><td>Water Street</td><td>Waterfront, Riverwalk, streetcar</td><td>Lilac, Naked Farmer, Wine on Water</td></tr>
+ <tr><td>Midtown / Palma Ceia</td><td>Recovery studio, neighborhood wine bar</td><td>Pause Studio, Cru Cellars</td></tr>
+ <tr><td>St. Petersburg</td><td>Optional Sunday day trip</td><td>Parkshore Grill, Hostess</td></tr></table></div></div>`}
+};
+const TABS=[["home","Home"],["plan","Plan",4],["places","Places",V.length],["notes","Notes"]];
+const S={cat:"all",q:"",hood:"",day:""};
+let cur="home";
+function renderTabs(){$("#tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" data-tab="${t[0]}" aria-selected="${t[0]===cur}">${t[1]}${t[2]?`<span class="n">${t[2]}</span>`:""}</button>`).join("")}
+function show(tab,opts={}){cur=tab;renderTabs();$("#main").innerHTML=VIEWS[tab]();if(tab==="places")renderGrid();
+ if(!opts.keep)history.replaceState(null,"","#"+tab);if(!opts.noscroll)window.scrollTo({top:0})}
+function renderGrid(){
+ const q=S.q.trim().toLowerCase();
+ const list=V.filter(v=>(S.cat==="all"||(S.cat==="saved"?saved.has(v.id):v.c===S.cat))&&(!S.hood||v.hood===S.hood)&&(S.day===""||!/^Closed|Not listed/.test(v.h[+S.day]))&&(!q||(v.n+" "+v.hood+" "+v.why+" "+v.a+" "+CATN[v.c]).toLowerCase().includes(q)));
+ $("#grid").innerHTML=list.length?list.map(card).join(""):`<div class="empty">No places match. Try clearing a filter.</div>`;
+ $("#count").textContent=list.length+" of "+V.length;
+}
+function updSaved(){$("#savedPill").textContent="♥ "+saved.size+" saved";localStorage.setItem("tampa-saved",JSON.stringify([...saved]))}
+function goVenue(id){S.cat="all";S.q="";S.hood="";S.day="";show("places",{keep:false,noscroll:true});const el=$("#v-"+id);if(el){el.scrollIntoView({block:"center"});el.classList.add("hl");setTimeout(()=>el.classList.remove("hl"),2200)}}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-tab],[data-go],[data-chip],[data-save]");if(!t)return;
+ if(t.dataset.go)return goVenue(t.dataset.go);
+ if(t.dataset.tab){if(t.dataset.cat){S.cat=t.dataset.cat;S.q=S.hood=S.day=""}return show(t.dataset.tab)}
+ if(t.dataset.chip){S.cat=t.dataset.chip;document.querySelectorAll("[data-chip]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.chip===S.cat));return renderGrid()}
+ if(t.dataset.save){const id=t.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);updSaved();if(S.cat==="saved")renderGrid();else{t.setAttribute("aria-pressed",saved.has(id));t.textContent=saved.has(id)?"♥ Saved":"♡ Save"}}
+});
+document.addEventListener("input",e=>{if(e.target.id==="q"){S.q=e.target.value;renderGrid()}});
+document.addEventListener("change",e=>{if(e.target.id==="hood"){S.hood=e.target.value;renderGrid()}if(e.target.id==="day"){S.day=e.target.value;renderGrid()}});
+$("#theme").addEventListener("click",()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark";localStorage.setItem("tampa-theme",r.dataset.theme)});
+const th=localStorage.getItem("tampa-theme");if(th)document.documentElement.dataset.theme=th;
+updSaved();
+const h=location.hash.slice(1);show(VIEWS[h]?h:"home",{keep:true,noscroll:true});
+if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
