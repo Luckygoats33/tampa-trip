@@ -170,7 +170,9 @@ footer{margin-top:28px;font-size:.8rem;color:var(--muted);display:grid;gap:6px}
 .rank{font:700 1.4rem var(--display);font-style:italic;color:var(--coral);margin-right:8px}
 @media print{.top,.acts,.save,.controls{display:none!important}.view{display:grid!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
 <link rel="stylesheet" href="trip-assistant.css">
+<link rel="stylesheet" href="tampa-features.css">
 </head>
 <body>
 <header class="top">
@@ -407,7 +409,7 @@ home(){return `<div class="view">
   <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="out").length} places</span><b>Outdoors &amp; nature</b><p class="small muted">Riverwalk, Bayshore, state parks, beaches, a manatee center and an organic farm.</p><button class="go" data-tab="places" data-cat="out">See outdoors →</button></div>
   <div class="tile"><span class="eyebrow">${P.length} spots</span><b>Top 10 photo spots</b><p class="small muted">Best light and sunset times for Oct 29 – Nov 1, with map links.</p><button class="go" data-tab="photos">See photo spots →</button></div>
   <div class="tile"><span class="eyebrow">${V.filter(v=>v.loc).length} picks</span><b>Local favorites</b><p class="small muted">Neighborhood gems, each with the local source that backs it.</p><button class="go" data-tab="places" data-cat="loc">See local picks →</button></div>
-  <div class="tile"><span class="eyebrow">Know before you go</span><b>Weather, transport, tips</b><p class="small muted">What to pack, how to get around, and reservation flags.</p><button class="go" data-tab="notes">Practical notes →</button></div>
+  <div class="tile"><span class="eyebrow">Know before you go</span><b>Help &amp; practical notes</b><p class="small muted">Emergency numbers, ER and pharmacy, airport, rides, weather and reservation flags.</p><button class="go" data-tab="help">Open Help →</button></div>
  </div></div>`},
 plan(){return `<div class="view"><div class="head"><h2>Suggested itinerary</h2><p class="muted">Tap any place name to jump to its details. Tags show where to book ahead.</p></div><div class="days">${PLAN.map(dayCard).join("")}</div></div>`},
 places(){const hoods=[...new Set(V.map(v=>v.hood))].sort();
@@ -493,6 +495,10 @@ updSaved();
 const h=location.hash.slice(1);show(VIEWS[h]?h:"home",{keep:true,noscroll:true});
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script src="tampa-coords.js"></script>
+<script src="tampa-features.js"></script>
 <script type="application/json" id="trip-assistant-config">
 {
   "city": "Tampa, Florida",

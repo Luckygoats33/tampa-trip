@@ -39,6 +39,10 @@ The module uses the host page's CSS variables (`--surface`, `--ink`, `--teal`, .
 - Grok `https://grok.com/?q=` **submits immediately** on load.
 Link prompts are capped (`maxUrlChars`, default 1800 encoded chars): the link version lists as many venue names as fit; the copy version is complete. If a provider drops its `?q=` support, remove it from `apps`.
 
+## NOLA-parity update (Oct 14, 2026)
+Extra files: `tampa-features.js` / `.css` (all new features, loaded after the main script), `tampa-coords.js` (venue coordinates from OpenStreetMap/Nominatim address lookups; parks are street-level and flagged approximate in the card). Leaflet + markercluster come from cdnjs, OSM tiles.
+New: Map tab (pins by type, tap for details sheet, locate me, area jumps, open-now/saved filters, places-in-view list), Journal (replaces NOLA's tattoo "Ink": visited, ratings, notes, passport, share recap, send location), Help tab (911/TPD/Poison/988, ER, urgent care, 24h pharmacy, TPA, rides, Halloween + DST, practical notes, app guide, tour), Open-now pill with preview time, Near me, Surprise me, weather (Open-Meteo), Route-this-day, copy-link deep links (`?p=<id>`), install button. Photos is now a toggle inside Places; Notes moved into Help. Service worker cache `tampa-trip-v4`.
+
 ## Site structure (Oct 14, 2026 update)
 - Bottom tab bar on phones (Home, Plan, Places, Photos, Saved, Notes), same pattern as the NOLA app; on desktop the same tabs sit in the header. Saved lives only in the tab bar (with a count badge).
 - Places filters: type (Eat, Coffee, Biohack, Natural wine, Juice, Outdoors & nature), ★ Local favorites (each carries its source in `loc`), Photo-worthy, plus neighborhood and day.
