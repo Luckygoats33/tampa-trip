@@ -1,6 +1,6 @@
 /* Offline shell for the Tampa trip hub. Live sites and maps are not cached. */
-const CACHE = "tampa-trip-v1";
-const SHELL = ["./", "index.html", "manifest.webmanifest", "icon.svg"];
+const CACHE = "tampa-trip-v3";
+const SHELL = ["./", "index.html", "manifest.webmanifest", "icon.svg", "trip-assistant.js", "trip-assistant.css"];
 self.addEventListener("install", e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {

@@ -1,0 +1,25 @@
+/* Trip assistant module: floating button + bottom sheet. Uses the host page's CSS variables
+   (--surface, --ink, --line, --teal, --teal-d, --sunk, --muted, --coral, --display) with fallbacks. */
+.ta-fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:8px;
+  min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--teal-d,#12413F);background:var(--teal-d,#12413F);color:#FFF8EE;
+  font:800 .9rem var(--body,system-ui);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+:root[data-theme="dark"] .ta-fab{background:var(--teal);color:#0B1F20;border-color:var(--teal)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ta-fab{background:var(--teal);color:#0B1F20;border-color:var(--teal)}}
+.ta-back{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
+.ta-sheet{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--surface,#fff);color:var(--ink,#25303A);
+  border:1px solid var(--line,#E8D9BF);border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));display:grid;gap:10px}
+.ta-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ta-head h2{font-size:1.35rem}
+.ta-x{border:1px solid var(--line);background:var(--sunk);border-radius:999px;width:40px;height:40px;font-size:1.1rem}
+.ta-ctx{font-size:.82rem;color:var(--muted,#5F6B73);margin:0}
+.ta-q{width:100%;box-sizing:border-box;min-height:84px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--bg,#FFF8EE);color:var(--ink);font:16px/1.4 var(--body,system-ui)}
+.ta-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ta-chip{border:1px solid var(--line);background:var(--sunk);border-radius:999px;padding:6px 12px;font-size:.8rem;font-weight:700}
+.ta-open{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ta-open a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:12px;border:1px solid var(--teal);color:var(--teal);
+  background:var(--surface);font-weight:800;font-size:.9rem;text-decoration:none}
+.ta-open a[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.ta-copy{min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--sunk);font-weight:800}
+.ta-msg{font-size:.8rem;color:var(--muted);margin:0;min-height:1.2em}
+@media print{.ta-fab,.ta-back{display:none!important}}

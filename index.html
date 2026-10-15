@@ -143,16 +143,42 @@ th{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;col
 footer{margin-top:28px;font-size:.8rem;color:var(--muted);display:grid;gap:6px}
 @media (min-width:760px){body{font-size:16px}.logo{font-size:2.1rem}.step{grid-template-columns:100px 1fr}.days{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}}
 @media (max-width:420px){.hours{grid-template-columns:repeat(2,1fr)}.step{grid-template-columns:64px 1fr}}
+
+/* bottom nav (mirrors the NOLA app: icon tabs fixed to the bottom on phones) */
+.tab{display:flex;align-items:center;gap:6px;position:relative}
+.tab svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tab .n{background:var(--coral);color:#fff;border-radius:999px;padding:0 6px;opacity:1}
+@media (max-width:899px){
+ body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+ .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;margin:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);justify-content:space-around;gap:2px;overflow:visible;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+ .tab{flex:1 1 0;flex-direction:column;justify-content:center;gap:2px;min-height:56px;padding:4px 0;border:0;border-radius:12px;background:transparent;font-size:.68rem;color:var(--muted)}
+ .tab svg{width:22px;height:22px}
+ .tab[aria-selected="true"]{background:var(--teal-soft)!important;color:var(--teal-d)!important;border:0}
+ :root[data-theme="dark"] .tab[aria-selected="true"]{color:var(--teal)!important}
+ .tab .n{position:absolute;top:2px;left:calc(50% + 6px);margin:0;font-size:.62rem;line-height:1.5}
+ .ta-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+ .top-row{padding-bottom:8px}
+}
+@media (min-width:900px){.tab svg{display:none}}
+@media (max-width:360px){.tab span:not(.n){font-size:.6rem}}
+.card{content-visibility:auto;contain-intrinsic-size:auto 420px}
+.badge{display:inline-block;font:800 .68rem var(--body);padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:middle;background:var(--leaf-soft);color:var(--leaf)}
+.badge.loc{background:var(--sun-soft);color:var(--gold)}
+.badge.ph{background:var(--wine-soft);color:var(--wine)}
+.src2{font-size:.78rem;color:var(--muted)}
+.sun-tbl td,.sun-tbl th{text-align:center}
+.rank{font:700 1.4rem var(--display);font-style:italic;color:var(--coral);margin-right:8px}
 @media print{.top,.acts,.save,.controls{display:none!important}.view{display:grid!important}}
 </style>
+<link rel="stylesheet" href="trip-assistant.css">
 </head>
 <body>
 <header class="top">
   <div class="wave"></div>
   <div class="wrap">
     <div class="top-row">
-      <div><div class="logo">Tampa <span>Trip</span></div><div class="sub">Thu Oct 29 – Sun Nov 1, 2026 · Will, Sanni &amp; her sister</div></div>
-      <div class="tools"><span class="pill" id="savedPill">♥ 0 saved</span><button class="pill" id="theme" aria-label="Toggle dark mode">◐ Theme</button></div>
+      <div><div class="logo">Tampa <span>Trip</span></div></div>
+      <div class="tools"><button class="pill" id="theme" aria-label="Toggle dark mode">◐ Theme</button></div>
     </div>
     <nav class="tabs" role="tablist" id="tabs"></nav>
   </div>
@@ -169,7 +195,7 @@ const V=[
 {id:"rooster",c:"eat",n:"Rooster & the Till",hood:"Seminole Heights",a:"6500 N Florida Ave, Tampa, FL 33604",t:"$$$",ph:"(813) 374-8940",
  h:["5–9pm","5–10pm (bar to 12am)","5–10pm (bar to 12am)","Closed"],hs:"Wed–Thu 5–9pm · Fri–Sat 5–10pm, bar to midnight",
  why:"Michelin Bib Gourmand kitchen turning out vegetable-forward, globally inspired small plates with an adventurous wine list.",
- res:"must",site:"https://www.roosterandthetill.com/",src:"roosterandthetill.com",note:"Reserve via OpenTable or phone (they do not take reservations by email). Free lot at Diane St &amp; Florida Ave."},
+ loc:"Michelin Guide Bib Gourmand; Tampa Bay Times Top 50 (No. 1 in 2018 per its site)",res:"must",site:"https://www.roosterandthetill.com/",src:"roosterandthetill.com",note:"Reserve via OpenTable or phone (they do not take reservations by email). Free lot at Diane St &amp; Florida Ave."},
 {id:"ulele",c:"eat",n:"Ulele",hood:"Tampa Heights · Riverwalk",a:"1810 N Highland Ave, Tampa, FL 33602",t:"$$$",ph:"(813) 999-4952",
  h:["11am–10pm","11am–11pm","11am–11pm","11am–10pm"],hs:"Sun–Thu 11am–10pm · Fri–Sat 11am–11pm",
  why:"Native-inspired Florida seafood and produce cooked over a huge barbacoa grill, right on the Hillsborough River; states its food is non-GMO with no added hormones or antibiotics.",
@@ -189,7 +215,7 @@ const V=[
 {id:"nakedfarmer",c:"eat",n:"Naked Farmer (Water Street)",hood:"Water Street",a:"1001 Water St, Tampa, FL 33602",t:"$$",ph:"(813) 608-0329",
  h:["11am–9:30pm","11am–10:30pm","11am–10:30pm","11:30am–9pm"],hs:"Mon–Thu 11am–9:30pm · Fri–Sat 11am–10:30pm · Sun 11:30am–9pm",
  why:"Scratch-made farm-to-table bowls and plates from regional farms, with vegan, gluten-free and high-protein options plus wine and beer.",
- res:"",site:"https://www.eatnakedfarmer.com/tampa-water-street",src:"eatnakedfarmer.com",note:"Counter-style and fast. Steps from the Riverwalk and Sparkman Wharf."},
+ loc:"Tampa Magazine 2026 Best of the City: Health-Conscious Restaurant (Sept 24, 2026)",res:"",site:"https://www.eatnakedfarmer.com/tampa-water-street",src:"eatnakedfarmer.com",note:"Counter-style and fast. Steps from the Riverwalk and Sparkman Wharf."},
 {id:"parkshore",c:"eat",n:"Parkshore Grill",hood:"St. Petersburg (day trip)",a:"300 Beach Dr NE, St. Petersburg, FL 33701",t:"$$$",ph:"727-896-9463",
  h:["11am–9:30pm","11am–10:30pm","11am–10:30pm","10:30am–9:30pm"],hs:"Mon–Thu 11am–9:30pm · Fri–Sat 11am–10:30pm · Sun 10:30am–9:30pm",
  why:"Waterfront modern American on Beach Drive; VISIT FLORIDA notes sustainable seafood and local organic produce.",
@@ -215,7 +241,7 @@ const V=[
 {id:"heightsmarket",c:"juice",n:"Armature Works · Heights Public Market",hood:"Heights · Armature Works",a:"1910 N Ola Ave, Tampa, FL 33602",t:"$$",ph:"info@armatureworks.com",
  h:["7:30am–10pm","7:30am–12am","8am–12am","9am–9pm"],hs:"Mon–Thu 7:30am–10pm · Fri 7:30am–12am · Sat 8am–12am · Sun 9am–9pm",
  why:"Restored riverfront warehouse and food hall on the Hillsborough River: grab coffee, a bowl or a snack, then walk the Riverwalk.",
- res:"",site:"https://www.armatureworks.com/location/armature-works/",src:"armatureworks.com",note:"Individual vendors keep their own hours. Free lot parking Mon–Fri until 4pm (not the 220 lot). A 3% venue fee is added to checks."},
+ photo:1,res:"",site:"https://www.armatureworks.com/location/armature-works/",src:"armatureworks.com",note:"Individual vendors keep their own hours. Free lot parking Mon–Fri until 4pm (not the 220 lot). A 3% venue fee is added to checks."},
 
 {id:"setima",c:"wine",n:"La Sétima Club",hood:"Ybor City",a:"815 E 7th Ave, Tampa, FL 33602",t:"$$",ph:"(813) 400-1610",
  h:["5–10pm","5pm–12am","5pm–12am","5–10pm"],hs:"Closed Mon · Tue–Thu 5–10pm · Fri–Sat 5pm–12am · Sun 5–10pm",
@@ -236,14 +262,75 @@ const V=[
 {id:"hostess",c:"wine",n:"Hostess",hood:"St. Petersburg (day trip)",a:"2635 Central Ave, St. Petersburg, FL 33713",t:"$$",ph:"727-289-3082",
  h:["3–9pm","3–9pm","12–9pm","12–6pm"],hs:"Closed Mon–Tue · Wed–Fri 3–9pm · Sat 12–9pm · Sun 12–6pm",
  why:"Boutique and garden wine bar pouring small-batch, sustainable and natural vintners; an easy afternoon glass or pre-dinner toast.",
- res:"",site:"https://www.toastthehostess.com/",src:"toastthehostess.com",note:"Sunday closes early, at 6pm."}
+ res:"",site:"https://www.toastthehostess.com/",src:"toastthehostess.com",note:"Sunday closes early, at 6pm."},
+{id:"riverwalk",c:"out",n:"Tampa Riverwalk",hood:"Downtown · Riverwalk",a:"100 N Ashley Dr, Tampa, FL 33602",t:"Free",ph:"813-274-8162",photo:1,
+ h:["Open 24 hrs","Open 24 hrs","Open 24 hrs","Open 24 hrs"],hs:"Open 24 hours a day (Friends of the Riverwalk FAQ)",
+ why:"A 2.6-mile waterfront path from Armature Works to Sparkman Wharf linking parks, museums and restaurants. Flat, shaded in places, perfect for a long walk or a bike.",
+ res:"",site:"https://thetampariverwalk.com/who-we-are/frequent-questions.html",src:"thetampariverwalk.com + tampasdowntown.com",note:"Pirate Water Taxi stops along it. Walk it by day; evenings are livelier on Halloween weekend."},
+{id:"curtishixon",c:"out",n:"Curtis Hixon Waterfront Park",hood:"Downtown · Riverwalk",a:"600 N Ashley Dr, Tampa, FL 33602",t:"Free",ph:"(813) 274-8615",photo:1,
+ h:["7am–10pm","7am–10pm","7am–10pm","7am–10pm"],hs:"Daily 7am–10pm (City of Tampa)",
+ why:"Great lawn on the Hillsborough River with the best downtown skyline views, plus the Riverwalk, a dog park and a water-taxi stop.",
+ res:"",site:"https://www.tampa.gov/parks-and-recreation/featured-parks/curtis-hixon",src:"tampa.gov",note:"Splash pad hours are Nov–Mar 10am–10pm. Big events can crowd the lawn."},
+{id:"bayshore",c:"out",n:"Bayshore Boulevard Linear Park",hood:"Hyde Park · South Tampa",a:"312 Bayshore Blvd, Tampa, FL 33606",t:"Free",ph:"(813) 274-8615",photo:1,loc:"City of Tampa trail page; a local walking and running favorite",
+ h:["Sunrise–sunset","Sunrise–sunset","Sunrise–sunset","Sunrise–sunset"],hs:"Sunrise to sunset (City of Tampa)",
+ why:"4.5 miles of continuous sidewalk beside Tampa Bay, past historic Hyde Park homes. Locals walk and run it at sunrise and sunset.",
+ res:"",site:"https://www.tampa.gov/parks-and-recreation/programs/parks-and-facilities/greenways-and-trails/trail-maps/bayshore-trail",src:"tampa.gov",note:"Water fountains and fitness stations along the way. Parking at Ballast Point Park and Fred Ball Park."},
+{id:"hrsp",c:"out",n:"Hillsborough River State Park",hood:"Thonotosassa (day trip)",a:"15402 US-301 N, Thonotosassa, FL 33592",t:"$6 / car",ph:"813-688-9500",photo:1,
+ h:["8am–sunset","8am–sunset","8am–sunset","8am–sunset"],hs:"Daily 8am to sunset · paddle and bike rentals on a reduced schedule (see note)",
+ why:"Rare Class II river rapids, seven miles of trails and the historic Fort Foster, about 25 minutes from Tampa.",
+ res:"",site:"https://www.floridastateparks.org/parks-and-trails/hillsborough-river-state-park",src:"floridastateparks.org",note:"Per the park (from Aug 4, 2026): rentals Fri–Sun 8am–6pm, Mon–Thu 9am–5pm with Tue and Wed closed; last launch 1 hour before close. Parts of the Rapids Trail remain closed: follow posted signs."},
+{id:"honeymoon",c:"out",n:"Honeymoon Island State Park",hood:"Dunedin (Gulf beach day trip)",a:"1 Causeway Blvd, Dunedin, FL 34698",t:"$8 / car",ph:"727-241-6106",photo:1,
+ h:["8am–sunset","8am–sunset","8am–sunset","8am–sunset"],hs:"Daily 8am to sunset",
+ why:"Four-plus miles of beach, a three-mile trail through virgin slash pine forest, eagles and osprey, and the ferry dock to Caladesi Island.",
+ res:"",site:"https://www.floridastateparks.org/parks-and-trails/honeymoon-island-state-park",src:"floridastateparks.org",note:"Notice dated Oct 7, 2026: the North, Oasis and Picnic Area parking lots were temporarily closed for flooding. Check the park page before driving (about 1 hour from Tampa)."},
+{id:"caladesi",c:"out",n:"Caladesi Island State Park",hood:"Dunedin (boat access only)",a:"Offshore island, Dunedin, FL 34698 (ferry from Honeymoon Island)",t:"Entry + ferry",ph:"727-241-6126",
+ h:["8am–sunset","8am–sunset","8am–sunset","8am–sunset"],hs:"Daily 8am to sunset · reachable only by boat",
+ why:"One of the few undeveloped Gulf Coast barrier islands: quiet beach, shelling, mangrove paddling trails and a nature trail to the Scharrer Homestead.",
+ res:"",site:"https://www.floridastateparks.org/parks-and-trails/caladesi-island-state-park",src:"floridastateparks.org",note:"Take the Caladesi Island Ferry from Honeymoon Island; confirm the ferry schedule when you plan. Park notes food service may be limited."},
+{id:"fortdesoto",c:"out",n:"Fort De Soto Park",hood:"Tierra Verde (St. Pete area)",a:"3500 Pinellas Bayway S, Tierra Verde, FL 33715",t:"Paid parking",ph:"(727) 582-2100 (county parks)",photo:1,
+ h:["7am–sunset","7am–sunset","7am–sunset (races: opens 9am Oct 31)","7am–sunset"],hs:"Open 7 days, 7am to sunset",
+ why:"Almost three miles of white sand beach across Mullet Key, a historic fort, fishing piers and quiet bay-side paths.",
+ res:"",site:"https://pinellas.gov/parks/fort-de-soto-park/",src:"pinellas.gov",note:"County notes repaving and boat-ramp dock work this fall; the beaches stay open. A local report says the park opens at 9am on Oct 31 for a race, so go late morning that day. Parking is paid and cashless."},
+{id:"weedon",c:"out",n:"Weedon Island Preserve",hood:"St. Petersburg",a:"1800 Weedon Dr NE, St. Petersburg, FL 33702",t:"Free",ph:"(727) 582-2100 (county parks)",
+ h:["7am–sunset","7am–sunset","7am–sunset","7am–sunset"],hs:"Trails daily 7am to sunset · center Thu–Sat 9am–4pm, Sun 11am–4pm",
+ why:"Mangrove boardwalks and trails with a cultural and natural history center. Quiet birding and kayak-trail scenery on the bay.",
+ res:"",site:"https://pinellas.gov/parks/weedon-island-preserve/",src:"pinellas.gov/park-hours",note:"The preserve does not rent kayaks. A local outfitter (ECOmersion) lists rentals through Nov 15, tide-dependent, so confirm with them. The North paddling trail was reported closed."},
+{id:"manatee",c:"out",n:"Tampa Electric Manatee Viewing Center",hood:"Apollo Beach (day trip)",a:"6990 Dickman Rd, Apollo Beach, FL 33572",t:"Free",ph:"813-228-4289",
+ h:["Closed (season opens Nov 1)","Closed (season opens Nov 1)","Closed (season opens Nov 1)","10am–5pm (trails to 4pm)"],hs:"Nov 1 – Apr 15, daily 10am–5pm, trails and tower close 4pm",
+ why:"Free viewing boardwalk where wild manatees gather in the warm outflow from the power plant. Opens for the season on Sunday Nov 1.",
+ res:"",site:"https://www.tampaelectric.com/company/mvc/",src:"tampaelectric.com",note:"Only open on our Sunday. Sightings are better on cooler mornings; early November can be hit or miss. Free admission and parking."},
+{id:"sweetwater",c:"out",n:"Sweetwater Organic Community Farm",hood:"Town 'n' Country · West Tampa",a:"6942 W Comanche Ave, Tampa, FL 33634",t:"$",ph:"813-887-4066",photo:0,loc:"Florida's oldest organic community farm; nonprofit, locally run",
+ h:["Closed","Closed","Closed","Market 12–3pm · café 10am–4pm"],hs:"Sundays only: café 10am–4pm, market and farm stand 12–3pm (season Nov 1 – Apr 25, 2027)",
+ why:"A nonprofit organic farm with a Sunday farmers' market, farm stand, organic coffee and smoothies. Bring a picnic.",
+ res:"",site:"https://www.sweetwater-organic.org/sunday-market/",src:"sweetwater-organic.org",note:"The 2026–27 market opens this Sunday, Nov 1. Closed to the public other days; call to book a farm tour."},
+{id:"jetcity",c:"cafe",n:"Jet City Espresso · Hyde Park",hood:"Hyde Park",a:"318 S Edison Ave, Tampa, FL 33606",t:"$",ph:"(813) 541-5048",loc:"Dripos Tampa coffee guide (a beloved Hyde Park staple); hours from joe.coffee listing",
+ h:["8am–2pm","8am–2pm","9am–2pm","9am–2pm"],hs:"Tue–Fri 8am–2pm · Sat–Sun 9am–2pm · closed Mon (from listing)",
+ why:"Coffee and breakfast on the porch of a historic house. Its site says it is paleo-minded and gluten-free-friendly, with local organic eggs.",
+ res:"",site:"https://www.jetcityespresso.com/",src:"jetcityespresso.com + joe.coffee (hours)",note:"Official site does not post hours, so confirm on the day. Free parking and Wi-Fi."}
 ];
-const CATS={all:"All",eat:"Eat",well:"Biohack",wine:"Natural wine",juice:"Juice & markets"};
-const CATN={eat:"Restaurant",well:"Wellness / longevity",wine:"Wine",juice:"Juice / market"};
+const CATS={all:"All",eat:"Eat",cafe:"Coffee",well:"Biohack",wine:"Natural wine",juice:"Juice & markets",out:"Outdoors & nature",loc:"★ Local favorites",photo:"Photo-worthy"};
+const CATN={eat:"Restaurant",cafe:"Coffee / café",well:"Wellness / longevity",wine:"Wine",juice:"Juice / market",out:"Outdoors / nature"};
+
+/* Top 10 photo spots. best = suggested light; sun = sunset note. All checked Oct 14, 2026. */
+const P=[
+{id:"p-bayshore",n:"Bayshore Boulevard",hood:"South Tampa",a:"312 Bayshore Blvd, Tampa, FL 33606",best:"Golden hour, about 6:00–6:45pm",why:"4.5 miles of seawall sidewalk with bay views and palms, with the historic Hyde Park homes opposite. The bay is to the west, so this is the sunset spot.",site:"https://www.tampa.gov/parks-and-recreation/programs/parks-and-facilities/greenways-and-trails/trail-maps/bayshore-trail",src:"tampa.gov",v:"bayshore"},
+{id:"p-riverwalk",n:"Riverwalk at Curtis Hixon",hood:"Downtown",a:"600 N Ashley Dr, Tampa, FL 33602",best:"Blue hour after sunset, 7:00–7:30pm, for the skyline lights",why:"The great lawn faces the downtown skyline across the Hillsborough River, with the Riverwalk and the Pirate water-taxi dock in frame.",site:"https://www.tampa.gov/parks-and-recreation/featured-parks/curtis-hixon",src:"tampa.gov",v:"curtishixon"},
+{id:"p-armature",n:"Armature Works &amp; Heights waterfront",hood:"Tampa Heights",a:"1910 N Ola Ave, Tampa, FL 33602",best:"Late afternoon, then evening glow on the river",why:"Restored 1910 warehouse on the river with the skyline behind it and the Riverwalk at the door.",site:"https://www.armatureworks.com/location/armature-works/",src:"armatureworks.com",v:"heightsmarket"},
+{id:"p-theatre",n:"Tampa Theatre marquee",hood:"Downtown",a:"711 N Franklin St, Tampa, FL 33602",best:"After dark, when the marquee and vertical sign are lit",why:"The 1926 movie palace turns 100 on Oct 15, 2026. The neon marquee is the shot; interior photos need a show ticket or tour.",site:"https://tampatheatre.org/about/know-before-you-go/",src:"tampatheatre.org",note:"Box office (813) 274-8286. Public tours were paused during the auditorium restoration (planned through September): check before you go."},
+{id:"p-tower",n:"Sulphur Springs Water Tower",hood:"Sulphur Springs",a:"8105 N Florida Ave, Tampa, FL 33604",best:"Early morning or dusk, when the tower is lit",why:"A 214-foot 1927 water tower in River Tower Park on the Hillsborough River. A quiet local landmark you view from the ground (the tower is closed to the public).",site:"https://www.tampa.gov/news/2023-11/sulphur-springs-landmark-gets-facelift-131176",src:"tampa.gov",loc:"City of Tampa landmark; a local favorite",note:"Small lot and one-lane access road off Bird St."},
+{id:"p-ybor",n:"Ybor City: Centennial Park &amp; 7th Ave murals",hood:"Ybor City",a:"1911 E 8th Ave, Tampa, FL 33605 (mural at 2015 E 7th Ave)",best:"Late morning to afternoon for even light on the brick",why:"Start at Centennial Park, stroll 7th Avenue's brick street and wrought-iron balconies, and see the 2023 women's march mural on the Ybor City Development Corporation building.",site:"https://www.visitflorida.com/travel-ideas/articles/walking-tour-ybor-city-florida/",src:"visitflorida.com + tampa.gov SoulWalk",loc:"Historic cigar district, loved by locals for its murals"},
+{id:"p-pier",n:"St. Pete Pier",hood:"St. Petersburg",a:"800 2nd Ave NE, St. Petersburg, FL 33701",best:"Sunset (about 6:46pm Oct 29–31, about 5:45pm Nov 1)",why:"Long pier over the bay with the downtown St. Pete skyline behind you. Opens 30 minutes before sunrise, closes 11pm.",site:"https://stpetepier.org/faq/",src:"stpetepier.org"},
+{id:"p-honeymoon",n:"Honeymoon Island",hood:"Dunedin",a:"1 Causeway Blvd, Dunedin, FL 34698",best:"Sunset over the Gulf, about 6:45pm",why:"Wide Gulf beach, driftwood, pine forest and wildlife. $8 per car, 8am to sunset.",site:"https://www.floridastateparks.org/parks-and-trails/honeymoon-island-state-park",src:"floridastateparks.org",note:"Parking lots were temporarily closed for flooding as of Oct 7, 2026: check the park page.",v:"honeymoon"},
+{id:"p-desoto",n:"Fort De Soto beaches &amp; fort",hood:"Tierra Verde",a:"3500 Pinellas Bayway S, Tierra Verde, FL 33715",best:"Late afternoon to sunset",why:"Nearly three miles of white sand, plus the old fort's guns and sweeping bay views. Open 7am to sunset.",site:"https://pinellas.gov/parks/fort-de-soto-park/",src:"pinellas.gov",v:"fortdesoto"},
+{id:"p-rapids",n:"Hillsborough River rapids",hood:"Thonotosassa",a:"15402 US-301 N, Thonotosassa, FL 33592",best:"Mid-morning, when sun filters through the canopy",why:"Class II rapids are rare in Florida. Footbridge and river trail views, plus the 1930s CCC structures.",site:"https://www.floridastateparks.org/parks-and-trails/hillsborough-river-state-park",src:"floridastateparks.org",v:"hrsp"}
+];
+const SUN=[["Thu Oct 29","7:39am","6:47pm"],["Fri Oct 30","7:39am","6:46pm"],["Sat Oct 31","7:40am","6:46pm"],["Sun Nov 1 *","about 6:41am","about 5:45pm"]];
 const DAYS=[["Thu","Oct 29"],["Fri","Oct 30"],["Sat","Oct 31"],["Sun","Nov 1"]];
 const $=s=>document.querySelector(s), byId=id=>V.find(v=>v.id===id);
 const maps=v=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(v.n.replace(/ \(.*\)/,"")+" "+v.a);
 const esc=s=>s;
+const pmaps=p=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.n.replace(/&amp;/g,"&")+" "+p.a);
+const ALL=[...V,...P];
 let saved=new Set(JSON.parse(localStorage.getItem("tampa-saved")||"[]"));
 
 /* itinerary: [time, html, venueId?, flag?] */
@@ -252,22 +339,31 @@ const PLAN=[
  ["Afternoon","Arrive and settle. Wander <b>Hyde Park Village</b> and grab an organic juice.","cleanjuice"],
  ["2–5pm","Optional longevity stop: an NAD+ IV (Thursday is the late day, open to 7pm) or a clinic consult.","tbtw","appt"],
  ["5:30pm","First glass of natural wine at a bar-and-bottle-shop in Palma Ceia.","cru"],
+ ["6:15pm","Golden-hour walk on Bayshore Boulevard. Sunset is at 6:47pm and the bay is to the west.","bayshore","opt"],
  ["7:30pm","Dinner in SoHo: seafood and vegan options in a polished room.","elevage","res"]]},
 {d:1,title:"Recovery, Heights &amp; Seminole Heights",hood:"Midtown · Hyde Park · Heights",steps:[
- ["9:00am","Recovery morning: infrared sauna, cold plunge, float or LED bed in private rooms.","pause","appt"],
+ ["8:15am","Coffee and a gluten-free-friendly breakfast on a Hyde Park porch (opens 8am).","jetcity","opt"],
+ ["9:30am","Recovery morning: infrared sauna, cold plunge, float or LED bed in private rooms.","pause","appt"],
  ["12:00pm","Brunch or lunch plus the bookstore, back in Hyde Park.","oxford"],
  ["3:00pm","Riverside stroll: coffee or a snack at the food hall, then walk the Riverwalk.","heightsmarket"],
+ ["4:30pm","Walk the Riverwalk to Curtis Hixon for skyline photos. Open 24 hours; the park is open until 10pm.","curtishixon","opt"],
  ["6:30pm","Dinner in Seminole Heights, ranked No. 1 in the Tampa Bay Times Top 50 in 2018 (per its site). Book early.","rooster","res"],
  ["9:30pm","Nightcap in Ybor (rideshare, open to midnight).","setima"]]},
 {d:2,title:"Water Street, Riverwalk &amp; a splurge dinner",hood:"Seminole Heights · Heights · Water Street",steps:[
+ ["8:30am","Nature morning (optional): Class II rapids and river trails, about 25 minutes north. Park opens 8am, $6 per car. Back by noon.","hrsp","opt"],
  ["12:00pm","Browse natural bottles to take home (opens at noon on Saturday).","jug"],
  ["1:30pm","Riverside lunch on the Hillsborough, with the Riverwalk right outside.","ulele","res"],
  ["4:30pm","Wine on the Water Street patio. Hop the free streetcar or walk the Riverwalk.","wineonwater"],
+ ["6:15pm","Sunset on the Riverwalk before dinner (sunset 6:46pm). Halloween crowds build after dark.","riverwalk","opt"],
  ["7:00pm","Big dinner: Michelin-starred Mediterranean. Prefer lighter? Do Naked Farmer instead.","lilac","res"],
  ["Alt","Light, farm-driven dinner on Water Street.","nakedfarmer","opt"]]},
-{d:3,title:"St. Pete day trip (optional)",hood:"St. Petersburg",steps:[
+{d:3,title:"St. Pete day trip (optional)",hood:"St. Petersburg · Apollo Beach",steps:[
  ["10:30am","Waterfront brunch on Beach Drive. About a 30–45 minute drive from Tampa (check live traffic).","parkshore","res"],
  ["2:00pm","Garden glass of natural wine on Central Ave. Closes at 6pm on Sunday.","hostess"],
+ ["Alt","Skip St. Pete? Sweetwater Organic Farm's Sunday market and café open for the season today (market 12–3pm, café 10am–4pm).","sweetwater","opt"],
+ ["Alt","Manatee Viewing Center opens for the season today, 10am–5pm (trails close at 4pm), free. About 30 minutes south.","manatee","opt"],
+ ["Alt","Beach instead: Fort De Soto, open 7am to sunset. Honeymoon Island is the Gulf alternative, but check its flood-closure notice first.","fortdesoto","opt"],
+ ["5:15pm","Sunset at the St. Pete Pier. Clocks fall back today, so sunset is about 5:45pm.",null,"opt"],
  ["Evening","Head back, or skip St. Pete: <b>Cru Cellars</b> (Sun 11am–9pm) and <b>Naked Farmer</b> (Sun 11:30am–9pm) keep Sunday easy in Tampa.","cru","opt"]]}
 ];
 const FL={res:["Reserve ahead","res"],appt:["Book / call ahead","appt"],opt:["Optional","opt"]};
@@ -279,12 +375,19 @@ function dayCard(p){
    return `<li class="step"><div class="time">${s[0]}</div><div><div class="t">${v?`<button class="lnk" data-go="${v.id}">${v.n}</button>`:""}${f?`<span class="flag ${f[1]}">${f[0]}</span>`:""}${v&&v.res==="must"&&!f?`<span class="flag res">Reserve ahead</span>`:""}</div><div class="w">${s[1]}</div></li>`}).join("")+`</ul></section>`;
 }
 function hoursGrid(v){return `<div class="hours">`+v.h.map((x,i)=>`<div class="${/^Closed|Not listed/.test(x)?"closed":""}"><i>${DAYS[i][0]} ${DAYS[i][1].split(" ")[1]}</i>${x}</div>`).join("")+`</div>`}
+function pcard(p,i){
+  return `<article class="card" id="${p.id}"><div class="card-h"><div><div class="cat">Photo spot${i!=null?" #"+(i+1):""} · ${p.hood}${p.loc?'<span class="badge loc">★ Local favorite</span>':""}</div><h3>${p.n}</h3></div></div>
+  <p class="why">${p.why}</p>
+  <div class="meta"><div><b>Best light</b> ${p.best}</div><div><b>Address</b> ${p.a}</div>${p.note?`<div>${p.note}</div>`:""}${p.loc?`<div class="src2">Local pick: ${p.loc}</div>`:""}</div>
+  <div class="acts"><a class="btn solid" href="${pmaps(p)}" target="_blank" rel="noopener">Map</a><a class="btn" href="${p.site}" target="_blank" rel="noopener">Official page</a><button class="save" data-save="${p.id}" aria-pressed="${saved.has(p.id)}">${saved.has(p.id)?"♥ Saved":"♡ Save"}</button></div>
+  <div class="ver">✓ Verified Oct 14, 2026 · ${p.src}</div></article>`;
+}
 function card(v){
   const r=v.res==="must"?["Reserve ahead","res"]:v.res==="yes"?["Reservations recommended","res"]:v.res==="appt"?["Book / call ahead","appt"]:v.res==="maybe"?["Reservations available","opt"]:null;
-  return `<article class="card" data-c="${v.c}" id="v-${v.id}"><div class="card-h"><div><div class="cat">${CATN[v.c]} · ${v.hood}</div><h3>${v.n}</h3></div><div class="tier" title="Estimated price tier">${v.t}</div></div>
+  return `<article class="card" data-c="${v.c}" id="v-${v.id}"><div class="card-h"><div><div class="cat">${CATN[v.c]} · ${v.hood}${v.loc?'<span class="badge loc">★ Local favorite</span>':""}</div><h3>${v.n}</h3></div><div class="tier" title="Estimated price tier">${v.t}</div></div>
   <p class="why">${v.why}${r?` <span class="flag ${r[1]}">${r[0]}</span>`:""}</p>
   ${hoursGrid(v)}
-  <div class="meta"><div><b>Address</b> ${v.a}</div><div><b>${v.ph.includes("@")?"Email":"Phone"}</b> ${v.ph}</div><div><b>Full hours</b> ${v.hs}</div><div>${v.note}</div></div>
+  <div class="meta"><div><b>Address</b> ${v.a}</div><div><b>${v.ph.includes("@")?"Email":"Phone"}</b> ${v.ph}</div><div><b>Full hours</b> ${v.hs}</div><div>${v.note}</div>${v.loc?`<div class="src2">Local pick: ${v.loc}</div>`:""}</div>
   <div class="acts"><a class="btn solid" href="${maps(v)}" target="_blank" rel="noopener">Map</a><a class="btn" href="${v.site}" target="_blank" rel="noopener">Website</a><button class="save" data-save="${v.id}" aria-pressed="${saved.has(v.id)}">${saved.has(v.id)?"♥ Saved":"♡ Save"}</button></div>
   <div class="ver">✓ Verified Oct 14, 2026 · ${v.src}</div></article>`;
 }
@@ -292,7 +395,7 @@ function card(v){
 const VIEWS={
 home(){return `<div class="view">
  <section class="hero"><div class="eyebrow" style="color:#F4B860">Tampa, Florida · 4 days</div><h1>Eat clean, recover well, drink natural.</h1>
- <p>A planned weekend for Will, Sanni and her sister: healthy restaurants, biohacking and longevity stops, and natural, organic wine, mostly $$ to $$$ with one optional splurge.</p>
+ <p>A planned weekend for Sanni and her sister: healthy restaurants, biohacking and longevity stops, natural, organic wine, plus nature and photo spots, mostly $$ to $$$ with one optional splurge.</p>
  <div class="facts"><span class="fact">Thu Oct 29 → Sun Nov 1</span><span class="fact">${V.length} verified places</span><span class="fact">Highs about 79–86°F</span><span class="fact">Clocks fall back Sun Nov 1</span></div></section>
  <div class="alert warn"><b>Book first:</b> Rooster &amp; the Till and Lilac are both closed Sunday and fill up. Reserve Friday and Saturday dinners now. Saturday is Halloween, so expect busier nightlife areas.</div>
  <div class="cards">
@@ -301,14 +404,24 @@ home(){return `<div class="view">
   <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="well").length} places</span><b>Biohack &amp; longevity</b><p class="small muted">Sauna, cold plunge, float, cryo, red light, NAD+ IVs.</p><button class="go" data-tab="places" data-cat="well">See wellness →</button></div>
   <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="wine").length} places</span><b>Natural wine</b><p class="small muted">Wine bars and bottle shops focused on natural, organic, small-production.</p><button class="go" data-tab="places" data-cat="wine">See wine →</button></div>
   <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="juice").length} places</span><b>Juice &amp; markets</b><p class="small muted">Organic juice and the riverfront food hall.</p><button class="go" data-tab="places" data-cat="juice">See juice →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.c==="out").length} places</span><b>Outdoors &amp; nature</b><p class="small muted">Riverwalk, Bayshore, state parks, beaches, a manatee center and an organic farm.</p><button class="go" data-tab="places" data-cat="out">See outdoors →</button></div>
+  <div class="tile"><span class="eyebrow">${P.length} spots</span><b>Top 10 photo spots</b><p class="small muted">Best light and sunset times for Oct 29 – Nov 1, with map links.</p><button class="go" data-tab="photos">See photo spots →</button></div>
+  <div class="tile"><span class="eyebrow">${V.filter(v=>v.loc).length} picks</span><b>Local favorites</b><p class="small muted">Neighborhood gems, each with the local source that backs it.</p><button class="go" data-tab="places" data-cat="loc">See local picks →</button></div>
   <div class="tile"><span class="eyebrow">Know before you go</span><b>Weather, transport, tips</b><p class="small muted">What to pack, how to get around, and reservation flags.</p><button class="go" data-tab="notes">Practical notes →</button></div>
  </div></div>`},
 plan(){return `<div class="view"><div class="head"><h2>Suggested itinerary</h2><p class="muted">Tap any place name to jump to its details. Tags show where to book ahead.</p></div><div class="days">${PLAN.map(dayCard).join("")}</div></div>`},
 places(){const hoods=[...new Set(V.map(v=>v.hood))].sort();
- return `<div class="view"><div class="head"><h2>Every place</h2><p class="muted">Search, filter by type, neighborhood or the day you want to go.</p></div>
- <div class="controls row" id="chips">${Object.entries(CATS).map(([k,l])=>`<button class="chip" data-chip="${k}" aria-pressed="${k===S.cat}">${l}</button>`).join("")}<button class="chip" data-chip="saved" aria-pressed="${S.cat==="saved"}">♥ Saved</button></div>
+ return `<div class="view"><div class="head"><h2>Every place</h2><p class="muted">Search, filter by type, neighborhood or the day you want to go. ★ marks local favorites with their source.</p></div>
+ <div class="controls row" id="chips">${Object.entries(CATS).map(([k,l])=>`<button class="chip" data-chip="${k}" aria-pressed="${k===S.cat}">${l}</button>`).join("")}</div>
  <div class="controls row"><input class="field search" id="q" type="search" placeholder="Search name, neighborhood, or “sauna”…" value="${S.q}" aria-label="Search places"><select class="field" id="hood" aria-label="Neighborhood"><option value="">All neighborhoods</option>${hoods.map(h=>`<option ${h===S.hood?"selected":""}>${h}</option>`).join("")}</select><select class="field" id="day" aria-label="Open on day"><option value="">Any day</option>${DAYS.map((d,i)=>`<option value="${i}" ${String(i)===S.day?"selected":""}>Open ${d[0]} ${d[1]}</option>`).join("")}</select><span class="count" id="count"></span></div>
  <div class="grid" id="grid"></div></div>`},
+photos(){return `<div class="view"><div class="head"><h2>Top 10 photo spots</h2><p class="muted">Verified places with the best light for each. Tap Map for directions.</p></div>
+ <div class="note"><h3>Sunrise &amp; sunset in Tampa</h3><table class="sun-tbl"><tr><th>Day</th><th>Sunrise</th><th>Sunset</th></tr>${SUN.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</table>
+ <p class="small muted">Oct 29–31 from timeanddate.com (Tampa). * Clocks fall back at 2am Sunday, so sunset jumps to about 5:45pm (estimated from the Oct 31 value). Golden hour is roughly the hour before sunset.</p></div>
+ <div class="grid">${P.map(pcard).join("")}</div></div>`},
+saved(){const items=ALL.filter(x=>saved.has(x.id));
+ return `<div class="view"><div class="head"><h2>Saved</h2><p class="muted">${items.length?"Everything you hearted, on this device.":"Nothing saved yet. Tap ♡ Save on any place or photo spot and it shows up here."}</p></div>
+ <div class="grid">${items.map(x=>x.id[0]==="p"&&x.id[1]==="-"?pcard(x):card(x)).join("")||`<div class="empty">No saved places yet.</div>`}</div></div>`},
 notes(){return `<div class="view"><div class="head"><h2>Practical notes</h2></div><div class="days">
  <div class="note"><h3>Weather</h3><p class="small muted">1991–2020 normals for Tampa (FSU Florida Climate Center):</p>
  <table><tr><th></th><th>Avg high</th><th>Avg low</th><th>Rain / month</th></tr><tr><td>October</td><td>85.6°F</td><td>69.2°F</td><td>2.34 in</td></tr><tr><td>November</td><td>78.9°F</td><td>60.7°F</td><td>1.40 in</td></tr></table>
@@ -340,36 +453,57 @@ notes(){return `<div class="view"><div class="head"><h2>Practical notes</h2></di
  <tr><td>Ybor City</td><td>Historic nightlife district</td><td>La Sétima Club</td></tr>
  <tr><td>Water Street</td><td>Waterfront, Riverwalk, streetcar</td><td>Lilac, Naked Farmer, Wine on Water</td></tr>
  <tr><td>Midtown / Palma Ceia</td><td>Recovery studio, neighborhood wine bar</td><td>Pause Studio, Cru Cellars</td></tr>
+ <tr><td>Outdoors</td><td>Walks, beaches, parks, farm</td><td>Riverwalk, Bayshore, Curtis Hixon, Honeymoon Island, Fort De Soto, Sweetwater</td></tr>
  <tr><td>St. Petersburg</td><td>Optional Sunday day trip</td><td>Parkshore Grill, Hostess</td></tr></table></div></div>`}
 };
-const TABS=[["home","Home"],["plan","Plan",4],["places","Places",V.length],["notes","Notes"]];
+const IC={
+home:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>',
+plan:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>',
+places:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>',
+photos:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+saved:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"/></svg>',
+notes:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.500v.1"/></svg>'};
+const TABS=[["home","Home"],["plan","Plan"],["places","Places"],["photos","Photos"],["saved","Saved"],["notes","Notes"]];
 const S={cat:"all",q:"",hood:"",day:""};
 let cur="home";
-function renderTabs(){$("#tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" data-tab="${t[0]}" aria-selected="${t[0]===cur}">${t[1]}${t[2]?`<span class="n">${t[2]}</span>`:""}</button>`).join("")}
+function renderTabs(){const n=saved.size;$("#tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" data-tab="${t[0]}" aria-selected="${t[0]===cur}" aria-label="${t[1]}${t[0]==="saved"&&n?" ("+n+")":""}">${IC[t[0]]}<span>${t[1]}</span>${t[0]==="saved"&&n?`<span class="n">${n}</span>`:""}</button>`).join("")}
 function show(tab,opts={}){cur=tab;renderTabs();$("#main").innerHTML=VIEWS[tab]();if(tab==="places")renderGrid();
  if(!opts.keep)history.replaceState(null,"","#"+tab);if(!opts.noscroll)window.scrollTo({top:0})}
 function renderGrid(){
  const q=S.q.trim().toLowerCase();
- const list=V.filter(v=>(S.cat==="all"||(S.cat==="saved"?saved.has(v.id):v.c===S.cat))&&(!S.hood||v.hood===S.hood)&&(S.day===""||!/^Closed|Not listed/.test(v.h[+S.day]))&&(!q||(v.n+" "+v.hood+" "+v.why+" "+v.a+" "+CATN[v.c]).toLowerCase().includes(q)));
+ const list=V.filter(v=>(S.cat==="all"||(S.cat==="loc"?v.loc:S.cat==="photo"?v.photo:v.c===S.cat))&&(!S.hood||v.hood===S.hood)&&(S.day===""||!/^Closed|Not listed/.test(v.h[+S.day]))&&(!q||(v.n+" "+v.hood+" "+v.why+" "+v.a+" "+CATN[v.c]).toLowerCase().includes(q)));
  $("#grid").innerHTML=list.length?list.map(card).join(""):`<div class="empty">No places match. Try clearing a filter.</div>`;
  $("#count").textContent=list.length+" of "+V.length;
 }
-function updSaved(){$("#savedPill").textContent="♥ "+saved.size+" saved";localStorage.setItem("tampa-saved",JSON.stringify([...saved]))}
-function goVenue(id){S.cat="all";S.q="";S.hood="";S.day="";show("places",{keep:false,noscroll:true});const el=$("#v-"+id);if(el){el.scrollIntoView({block:"center"});el.classList.add("hl");setTimeout(()=>el.classList.remove("hl"),2200)}}
+function updSaved(){renderTabs();localStorage.setItem("tampa-saved",JSON.stringify([...saved]))}
+function goVenue(id){if(!byId(id))return;S.cat="all";S.q="";S.hood="";S.day="";show("places",{keep:false,noscroll:true});const el=$("#v-"+id);if(el){el.scrollIntoView({block:"center"});el.classList.add("hl");setTimeout(()=>el.classList.remove("hl"),2200)}}
 document.addEventListener("click",e=>{
  const t=e.target.closest("[data-tab],[data-go],[data-chip],[data-save]");if(!t)return;
  if(t.dataset.go)return goVenue(t.dataset.go);
  if(t.dataset.tab){if(t.dataset.cat){S.cat=t.dataset.cat;S.q=S.hood=S.day=""}return show(t.dataset.tab)}
  if(t.dataset.chip){S.cat=t.dataset.chip;document.querySelectorAll("[data-chip]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.chip===S.cat));return renderGrid()}
- if(t.dataset.save){const id=t.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);updSaved();if(S.cat==="saved")renderGrid();else{t.setAttribute("aria-pressed",saved.has(id));t.textContent=saved.has(id)?"♥ Saved":"♡ Save"}}
+ if(t.dataset.save){const id=t.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);updSaved();if(cur==="saved")show("saved",{keep:true,noscroll:true});else{t.setAttribute("aria-pressed",saved.has(id));t.textContent=saved.has(id)?"♥ Saved":"♡ Save"}}
 });
-document.addEventListener("input",e=>{if(e.target.id==="q"){S.q=e.target.value;renderGrid()}});
+document.addEventListener("input",e=>{if(e.target.id==="q"){S.q=e.target.value;clearTimeout(window._qt);window._qt=setTimeout(renderGrid,120)}});
 document.addEventListener("change",e=>{if(e.target.id==="hood"){S.hood=e.target.value;renderGrid()}if(e.target.id==="day"){S.day=e.target.value;renderGrid()}});
 $("#theme").addEventListener("click",()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark";localStorage.setItem("tampa-theme",r.dataset.theme)});
 const th=localStorage.getItem("tampa-theme");if(th)document.documentElement.dataset.theme=th;
+window.TRIP_VENUES=V.map(v=>({name:v.n.replace(/&amp;/g,"&"),area:v.hood,type:CATN[v.c]||"",address:v.a})).concat(P.filter(p=>!p.v&&p.id!=="p-armature").map(p=>({name:p.n.replace(/&amp;/g,"&"),area:p.hood,type:"Photo spot",address:p.a})));
 updSaved();
 const h=location.hash.slice(1);show(VIEWS[h]?h:"home",{keep:true,noscroll:true});
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
+<script type="application/json" id="trip-assistant-config">
+{
+  "city": "Tampa, Florida",
+  "dates": "Thu Oct 29 to Sun Nov 1, 2026",
+  "travelers": "Sanni and her sister; health-conscious, interested in longevity/biohacking",
+  "context": "We like nature, beaches, sunset photo spots and local favorites over tourist traps. We eat healthy and organic, love natural/organic wine, and want upscale but not exclusive places (mostly $$ to $$$, one optional splurge).",
+  "suggestions": ["Best dinner for Saturday (Halloween)?", "Where to recover after a long day?", "Natural wine bar nearby?"],
+  "apps": ["chatgpt", "grok", "claude"],
+  "maxUrlChars": 1800
+}
+</script>
+<script src="trip-assistant.js" defer></script>
 </body>
 </html>
